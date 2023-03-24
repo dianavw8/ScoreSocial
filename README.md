@@ -3,7 +3,7 @@
 ![MIT License](https://img.shields.io/static/v1?label=license&message=MIT&color=green)
 
 ## Description
-ScoreSocial application takes Google Books API search engine built with a RESTful API, and has been refactored to be a GraphQL API built with Apollo Server. The application was built using the MERN stack, with a React front end, MongoDB database, and Node.js/Express.js server and API.
+ScoreSocial application was built using the MERN stack, with a React front end, MongoDB database, and Node.js/Express.js server and API.
 
 ## Table of Contents
 
@@ -46,9 +46,3 @@ MIT License link: https://github.com/babel/babel/blob/master/LICENSE
 ## Contributing
 
 The following are contributers to the making of the ScoreSocial project:
-
-https://shields.io/
-
-https://choosealicense.com/
-
-https://opensource.org/licenses##

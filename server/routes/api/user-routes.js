@@ -17,6 +17,12 @@ router.route('/login').post(login);
 
 router.route('/me').get(authMiddleware, getSingleUser);
 
+
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$ PROBABLY NOT GOING TO USE, FOR EXAMPLE ONLY $$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 router.route('/books/:bookId').delete(authMiddleware, deleteBook);
 
+
+//we do need this export though
 module.exports = router;
