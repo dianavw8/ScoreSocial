@@ -2,7 +2,7 @@ import React from 'react';
 
 const Bet = () => {
     return (
-        <p>hello</p>
+        <p>Bet</p>
     )
 }
 

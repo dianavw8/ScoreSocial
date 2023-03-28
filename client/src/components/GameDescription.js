@@ -2,7 +2,7 @@ import React from 'react';
 
 const GameDescription = () => {
     return (
-        <p>hello</p>
+        <p>Game Description</p>
     )
 }
 
