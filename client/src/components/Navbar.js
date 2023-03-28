@@ -20,6 +20,7 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
+
               <Nav.Link as={Link} to='/nfl'>
                 NFL
               </Nav.Link>
