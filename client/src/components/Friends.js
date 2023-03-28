@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Header = () => {
+const Friends = () => {
     return (
         <p>hello</p>
     )
 }
 
-
-export default Header;
+export default Friends;

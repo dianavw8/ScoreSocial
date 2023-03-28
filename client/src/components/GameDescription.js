@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Header = () => {
+const GameDescription = () => {
     return (
         <p>hello</p>
     )
 }
 
-
-export default Header;
+export default GameDescription;

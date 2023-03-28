@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Header = () => {
+const Bet = () => {
     return (
         <p>hello</p>
     )
 }
 
 
-export default Header;
+export default Bet;
