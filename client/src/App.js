@@ -4,6 +4,10 @@ import Friends from './components/Friends';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import Profile from './pages/Profile';
+import Mlb from './pages/Mlb';
+import Nfl from './pages/Nfl';
+import Nba from './pages/Nba';
+import Nhl from './pages/Nhl';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Main from './components/Main';
@@ -38,6 +42,10 @@ function App() {
           <Friends />
           <Switch>
             <Route exact path='/' component={Main} />
+            <Route exact path='/nfl' component={Nfl} />
+            <Route exact path='/mlb' component={Mlb} />
+            <Route exact path='/nba' component={Nba} />
+            <Route exact path='/nhl' component={Nhl} />
             <Route exact path='/profile' component={Profile} />
             <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
           </Switch>
