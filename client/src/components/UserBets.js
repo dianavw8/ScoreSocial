@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserBets = () => {
     return (
-        <p>hello</p>
+        <p>User Bets</p>
     )
 }
 
