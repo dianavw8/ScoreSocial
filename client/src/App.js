@@ -1,15 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import Challenges from './components/Challenges';
 import Friends from './components/Friends';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
-import Profile from './components/Profile';
+import Profile from './pages/Profile';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Main from './components/Main';
-import GameDescription from './components/GameDescription';
-import Bet from './components/Bet';
 
 
 const httpLink = createHttpLink({
