@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+
 import { getOdds, getScores } from '../utils/API';
 
 
@@ -26,6 +27,7 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
             <Nav className="ml-auto d-flex">
+
               <Nav.Link onclick={event => {
                 getOdds('americanfootball_nfl');
                 getScores('americanfootball_nfl');

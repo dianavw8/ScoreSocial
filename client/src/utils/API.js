@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // route to get logged in user's info (needs the token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
@@ -53,6 +55,7 @@ export const deleteBook = (bookId, token) => {
 
 
 // Using axios, we create a search method that is specific to our use case and export it at the bottom
+
 const getOdds = (query) => {
   const options = {
     method: 'GET',
@@ -100,5 +103,6 @@ const getScores = (query) => {
 }
 
 export default { getOdds, getScores };
+
 
 
