@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import { getOdds, getScores } from '../utils/API';
+
 
 import Auth from '../utils/auth';
 
@@ -24,17 +26,36 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
             <Nav className="ml-auto d-flex">
-              <Nav.Link as={Link} to="/nfl">
+              <Nav.Link onclick={event => {
+                getOdds('americanfootball_nfl');
+                getScores('americanfootball_nfl');
+              }}
+                as={Link} to="/nfl">
                 NFL
               </Nav.Link>
-              <Nav.Link as={Link} to="/mlb">
+
+              <Nav.Link onclick={event => {
+                getOdds('baseball_mlb');
+                getScores('baseball_mlb');
+              }}
+                as={Link} to="/mlb">
                 MLB
               </Nav.Link>
-              <Nav.Link as={Link} to="/nba">
-                NBA
-              </Nav.Link>
-              <Nav.Link as={Link} to="/nhl">
+
+              <Nav.Link onclick={event => {
+                getOdds('icehockey_nhl');
+                getScores('icehockey_nhl');
+              }}
+              as={link} to="/nhl">
                 NHL
+              </Nav.Link>
+              
+              <Nav.Link onclick={event => {
+                getOdds('basketball_nba');
+                getScores('basketball_nba');
+              }}
+              as={link} to="/nba">
+                NBA
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
