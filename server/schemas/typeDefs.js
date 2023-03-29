@@ -29,12 +29,7 @@ const typeDefs = gql`
   }
 
   input pointInput {
-    bookId: String!
-    authors: [String]
-    description: String
-    title: String!
-    image: String
-    link: String
+    pointNumber: Int
   }
 
   type Query {
