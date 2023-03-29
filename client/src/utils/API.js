@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 // route to get logged in user's info (needs the token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
@@ -56,7 +55,7 @@ export const deleteBook = (bookId, token) => {
 
 // Using axios, we create a search method that is specific to our use case and export it at the bottom
 
-const getOdds = (query) => {
+export const getOdds = (query) => {
   const options = {
     method: 'GET',
     url: `https://odds.p.rapidapi.com/v4/sports/${query}/odds`,
@@ -79,7 +78,7 @@ const getOdds = (query) => {
   });
 }
 
-const getScores = (query) => {
+export const getScores = (query) => {
   const options = {
     method: 'GET',
     url: `https://api.the-odds-api.com/v4/sports/${query}/scores/?daysFrom=1&apiKey=09976c555cmsh58729f87a32bfdbp1ac64ajsndc1b043664d3`,
@@ -102,7 +101,6 @@ const getScores = (query) => {
   });
 }
 
-export default { getOdds, getScores };
 
 
 
