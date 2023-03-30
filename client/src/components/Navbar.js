@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-
+import Auth from '../utils/auth';
 import { getOdds, getScores } from '../utils/API';
 
 
-import Auth from '../utils/auth';
+
 
 const AppNavbar = () => {
   // set modal display state
@@ -28,7 +28,7 @@ const AppNavbar = () => {
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
             <Nav className="ml-auto d-flex">
 
-              <Nav.Link onclick={event => {
+              <Nav.Link onClick={event => {
                 getOdds('americanfootball_nfl');
                 getScores('americanfootball_nfl');
               }}
@@ -36,7 +36,7 @@ const AppNavbar = () => {
                 NFL
               </Nav.Link>
 
-              <Nav.Link onclick={event => {
+              <Nav.Link onClick={event => {
                 getOdds('baseball_mlb');
                 getScores('baseball_mlb');
               }}
@@ -44,19 +44,19 @@ const AppNavbar = () => {
                 MLB
               </Nav.Link>
 
-              <Nav.Link onclick={event => {
+              <Nav.Link onClick={event => {
                 getOdds('icehockey_nhl');
                 getScores('icehockey_nhl');
               }}
-              as={link} to="/nhl">
+                as={Link} to="/nhl">
                 NHL
               </Nav.Link>
-              
-              <Nav.Link onclick={event => {
+
+              <Nav.Link onClick={event => {
                 getOdds('basketball_nba');
                 getScores('basketball_nba');
               }}
-              as={link} to="/nba">
+                as={Link} to="/nba">
                 NBA
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
