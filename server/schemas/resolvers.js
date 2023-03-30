@@ -18,10 +18,10 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     users: async () => {
-      return User.find().select('-__v -password').populate('savedBooks');
+      return User.find().select('-__v -password');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).select('-__v -password').populate('savedBooks');
+      return User.findOne({ username }).select('-__v -password');
     },
   },
   Mutation: {
@@ -47,32 +47,6 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    },
-    saveBook: async (parent, { bookData }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedBooks: bookData } },
-          { new: true, runValidators: true }
-        );
-
-        return updatedUser;
-      }
-
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    removeBook: async (parent, { bookId }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedBooks: { bookId: bookId } } },
-          { new: true }
-        );
-
-        return updatedUser;
-      }
-
-      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };
