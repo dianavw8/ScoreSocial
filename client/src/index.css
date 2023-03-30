@@ -1,5 +1,15 @@
+html,
 body {
   font-family: 'Rubik', sans-serif;
+  background-color: rgb(32, 32, 32)
+}
+
+.ui.inverted.top.fixed.menu {
+  background: black;
+}
+
+.ui.white.fluid.vertical.tabular.menu {
+  background: grey;
 }
 
 h1,
