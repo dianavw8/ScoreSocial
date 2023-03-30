@@ -48,7 +48,9 @@ const AppNavbar = () => {
                 getOdds('icehockey_nhl');
                 getScores('icehockey_nhl');
               }}
+
                 as={Link} to="/nhl">
+                
                 NHL
               </Nav.Link>
 
@@ -56,7 +58,9 @@ const AppNavbar = () => {
                 getOdds('basketball_nba');
                 getScores('basketball_nba');
               }}
+
                 as={Link} to="/nba">
+
                 NBA
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
