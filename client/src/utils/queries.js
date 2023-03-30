@@ -24,15 +24,6 @@ export const GET_USER = gql`
       _id
       username
       email
-      savedBooks {
-        bookId
-        title
-        authors
-        description
-        authors
-        link
-        image
-      }
     }
   }
 `;

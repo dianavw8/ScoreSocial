@@ -6,7 +6,7 @@ const typeDefs = gql`
     match: String
     stake: Float
     odds: Float
-    createdAt: Date
+    createdAt: String
     participants: [String]
   }
 
@@ -15,8 +15,6 @@ const typeDefs = gql`
     email: String!
     username: String!
     password: String!
-    firstName: String
-    lastName: String
     friends: [String]
     activeBets: [String]
     points: Int
@@ -38,7 +36,6 @@ const typeDefs = gql`
     user(username: String!): User
   }
 
-  // ADD MUTATIONS
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
