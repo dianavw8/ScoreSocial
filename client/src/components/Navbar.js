@@ -14,8 +14,17 @@ const AppNavbar = () => {
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
+<<<<<<< Updated upstream
           <Navbar.Brand as={Link} to='/'>
             ScoreSocial
+=======
+          <Navbar.Brand as={Link} to="/">
+            <img
+              style={{ width: "150px", height: "80px" }}
+              src={"./assets/logo.png"}
+              alt="logo"
+            />
+>>>>>>> Stashed changes
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
@@ -32,7 +41,13 @@ const AppNavbar = () => {
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
+<<<<<<< Updated upstream
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+=======
+                <Nav.Link as={Link} to="/loginform">{() => setShowModal(true)}>
+                  Login/Sign Up
+                </Nav.Link>
+>>>>>>> Stashed changes
               )}
             </Nav>
           </Navbar.Collapse>
