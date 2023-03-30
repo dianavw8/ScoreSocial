@@ -100,5 +100,3 @@ const getScores = (query) => {
 }
 
 export default { getOdds, getScores };
-
-
