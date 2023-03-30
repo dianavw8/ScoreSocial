@@ -9,10 +9,6 @@ export const LOGIN_USER = gql`
         _id
         username
         email
-        savedBooks {
-          title
-          authors
-        }
       }
     }
   }
@@ -26,10 +22,6 @@ export const ADD_USER = gql`
         _id
         username
         email
-        savedBooks {
-          title
-          authors
-        }
       }
     }
   }
