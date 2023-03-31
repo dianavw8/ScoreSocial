@@ -1,5 +1,5 @@
 import React, { useState, Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   Container,
   Grid,
@@ -9,13 +9,12 @@ import {
   Menu,
   Segment,
 } from "semantic-ui-react";
-import SignUpForm from './SignupForm';
-import LoginForm from './LoginForm';
-import Auth from '../utils/auth';
-import { getOdds, getScores } from '../utils/API';
+import SignUpForm from "./SignupForm";
+import LoginForm from "./LoginForm";
+import Auth from "../utils/auth";
 
 export default class Navbar extends Component {
-  state = { activeItem: "bio" };
+  state = { activeItem: "NFL" };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -73,7 +72,7 @@ export default class Navbar extends Component {
                   href="/login"
                   onClick={this.handleItemClick}
                 >
-                  <Icon name="sign out alternate" />
+                  <Icon name="sign in alternate" />
                   Login
                 </Menu.Item>
                 <Menu.Item
@@ -99,11 +98,7 @@ export default class Navbar extends Component {
                   inverted
                   color="teal"
                   active={activeItem === "NFL"}
-                  onClick={[
-                    this.handleItemClick,
-                    getOdds("americanfootball_nfl"),
-                    getScores("americanfootball_nfl"),
-                  ]}
+                  onClick={this.handleItemClick}
                 >
                   <Icon name="football ball" />
                   NFL
@@ -115,27 +110,19 @@ export default class Navbar extends Component {
                   inverted
                   color="teal"
                   active={activeItem === "MLB"}
-                  onClick={[
-                    this.handleItemClick,
-                    getOdds("baseball_mlb"),
-                    getScores("baseball_mlb"),
-                  ]}
+                  onClick={this.handleItemClick}
                 >
                   <Icon name="baseball ball" />
                   MLB
                 </Menu.Item>
                 <Menu.Item
-                  name="English Premire League"
+                  name="English Premier League"
                   as="h4"
-                  href="/engPremireLeague"
+                  href="/engPremierLeague"
                   inverted
                   color="teal"
-                  active={activeItem === "English Premire League"}
-                  onClick={[
-                    this.handleItemClick,
-                    getOdds("americanfootball_nfl"),
-                    getScores("americanfootball_nfl"),
-                  ]}
+                  active={activeItem === "English Premier League"}
+                  onClick={this.handleItemClick}
                 >
                   <Icon name="futbol outline" />
                   English Premire League
@@ -147,11 +134,7 @@ export default class Navbar extends Component {
                   inverted
                   color="teal"
                   active={activeItem === "NBA"}
-                  onClick={[
-                    this.handleItemClick,
-                    getOdds("basketball_nba"),
-                    getScores("basketball_nba"),
-                  ]}
+                  onClick={this.handleItemClick}
                 >
                   <Icon name="basketball ball" />
                   NBA
@@ -163,11 +146,7 @@ export default class Navbar extends Component {
                   inverted
                   color="teal"
                   active={activeItem === "NHL"}
-                  onClick={[
-                    this.handleItemClick,
-                    getOdds("icehockey_nhl"),
-                    getScores("icehockey_nhl"),
-                  ]}
+                  onClick={this.handleItemClick}
                 >
                   <Icon name="hockey puck" />
                   NHL
@@ -180,7 +159,6 @@ export default class Navbar extends Component {
               <Segment>Sports Stuff...</Segment>
             </Grid.Column>
           </Grid>
-
         </Container>
       </Container>
     );
