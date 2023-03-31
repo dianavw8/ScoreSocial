@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Bet {
@@ -21,6 +21,15 @@ const typeDefs = gql`
     betHistory: [String]
   }
 
+  type gameOdds {
+    id: String
+    sport_key: String
+    sport_title: String
+    commence_time: String
+    home_team: String
+    away_team: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -34,6 +43,7 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
+    gameOdds: [gameOdds!]!
   }
 
   type Mutation {

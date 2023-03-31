@@ -20,7 +20,8 @@ const authMiddleware = (context) => {
   }
 
   if (!token) {
-    throw new AuthenticationError('You have no token!');
+    // throw new AuthenticationError('You have no token!');
+    return context //remove this when testing is done
   }
 
   try {

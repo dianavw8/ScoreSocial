@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
-import { getOdds, getScores } from '../utils/API';
+// import { getOdds, getScores } from '../utils/API';
 
 
 
@@ -28,34 +28,38 @@ const AppNavbar = () => {
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
             <Nav className="ml-auto d-flex">
 
-              <Nav.Link onClick={event => {
-                getOdds('americanfootball_nfl');
-                getScores('americanfootball_nfl');
-              }}
+              <Nav.Link 
+              // onClick={event => {
+              //   getOdds('americanfootball_nfl');
+              //   getScores('americanfootball_nfl');
+              // }}
                 as={Link} to="/nfl">
                 NFL
               </Nav.Link>
 
-              <Nav.Link onClick={event => {
-                getOdds('baseball_mlb');
-                getScores('baseball_mlb');
-              }}
+              <Nav.Link 
+              // onClick={event => {
+              //   getOdds('baseball_mlb');
+              //   getScores('baseball_mlb');
+              // }}
                 as={Link} to="/mlb">
                 MLB
               </Nav.Link>
 
-              <Nav.Link onClick={event => {
-                getOdds('icehockey_nhl');
-                getScores('icehockey_nhl');
-              }}
+              <Nav.Link 
+              // onClick={event => {
+              //   getOdds('icehockey_nhl');
+              //   getScores('icehockey_nhl');
+              // }}
                 as={Link} to="/nhl">
                 NHL
               </Nav.Link>
 
-              <Nav.Link onClick={event => {
-                getOdds('basketball_nba');
-                getScores('basketball_nba');
-              }}
+              <Nav.Link 
+              // onClick={event => {
+              //   getOdds('basketball_nba');
+              //   getScores('basketball_nba');
+              // }}
                 as={Link} to="/nba">
                 NBA
               </Nav.Link>
