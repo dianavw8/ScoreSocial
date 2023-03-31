@@ -37,3 +37,14 @@ export const GET_BOOKS = gql`
     }
   }
 `;
+
+export const GET_ODDS = gql`
+  query gameOdds {
+    id
+    sport_key
+    sport_title
+    commence_time 
+    home_team
+    away_team
+  }
+`;
