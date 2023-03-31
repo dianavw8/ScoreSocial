@@ -12,9 +12,7 @@ import {
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
-// import { getOdds, getScores } from '../utils/API';
-
-
+import { getOdds, getScores } from '../utils/API';
 
 export default class Navbar extends Component {
   state = { activeItem: "bio" };
@@ -188,6 +186,3 @@ export default class Navbar extends Component {
     );
   }
 }
-
-
-      
