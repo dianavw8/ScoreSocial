@@ -180,10 +180,9 @@ export default class Navbar extends Component {
               <Segment>Sports Stuff...</Segment>
             </Grid.Column>
           </Grid>
+
         </Container>
       </Container>
     );
   }
 }
-              
-      
