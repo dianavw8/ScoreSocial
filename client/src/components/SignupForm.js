@@ -100,10 +100,6 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
 
 
 

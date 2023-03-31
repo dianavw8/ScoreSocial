@@ -25,7 +25,6 @@ const typeDefs = gql`
   type Profile {
     username: String!
     email: String!
-    avatar: Avatar
   }
 
   type LogoutResponse {

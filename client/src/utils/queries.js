@@ -24,7 +24,6 @@ export const GET_USER_PROFILE = gql`
     user(id: $userId) {
       username
       email
-      avatar
     }
   }
 `;
