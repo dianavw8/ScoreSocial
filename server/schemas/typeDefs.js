@@ -17,8 +17,19 @@ const typeDefs = gql`
     password: String!
     friends: [String]
     activeBets: [String]
-    points: Int
+    pointsEarned: Int
     betHistory: [String]
+    profile: Profile
+  }
+
+  type Profile {
+    username: String!
+    email: String!
+    avatar: Avatar
+  }
+
+  type LogoutResponse {
+    message: String
   }
 
   type gameOdds {
@@ -49,6 +60,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    logout: LogoutResponse
   }
 `;
 

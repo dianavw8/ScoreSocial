@@ -59,6 +59,13 @@ const resolvers = {
 
       return { token, user };
     },
+    logout: async (parent, args, { dataSources }) => {
+      // Log the user out by deleting their authentication token
+      await dataSources.usersAPI.deleteAuthToken();
+
+      // Return a success message
+      return { message: 'Logged out successfully' };
+    },
   },
 };
 
