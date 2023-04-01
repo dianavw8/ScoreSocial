@@ -17,10 +17,22 @@ const Nba = () => {
     }
    const gameOdds = data?.gameOdds
    console.log(gameOdds)
+
+   const handleItemClick = (item) => {
+    selectedItem(item);
+}
+
     return (
         <>
         <div className="centered-text">
-            <h1>National Basketball League</h1>
+            <h1>National Basketball Association</h1>
+            <ul>
+                    {sport.map((item) => (
+                        <li key={item.id} onClick={() => handleItemClick(item)}>
+                            {item.name}
+                        </li>
+                    ))}
+                </ul>
         </div>
       </>
     )
