@@ -19,6 +19,11 @@ const Mlb = () => {
 
     return (
         <>
+        <div className="centered-text">
+            <h1>Major League Baseball</h1>
+        </div>
+      </>
+        <>
         <p>Mlb</p>
         {loading ? (<h1>loading...</h1>) : (<div>{data?.gameOdds[0].id}</div>)}
         </>

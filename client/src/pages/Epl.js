@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Nfl = () => {
+const Epl = () => {
     return (
         <>
         <div className="centered-text">
-            <h1>National Football League</h1>
+            <h1>English Premier League</h1>
         </div>
       </>
     )
 }
 
 
-export default Nfl;
+export default Epl;

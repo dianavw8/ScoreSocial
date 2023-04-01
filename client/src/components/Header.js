@@ -1,12 +1,63 @@
-import React from 'react';
+import React, { useState, Component } from "react";
+import {
+  Container,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Menu,
+  Segment,
+} from "semantic-ui-react";
+import Auth from "../utils/auth";
 
-export
-const Header = () => {
-    return (
-        <p>Header</p>
-    )
-}
+const SSHeader = ({ pointsEarned, userProfile, loginForm, onLogout }) => {
 
+  return (
+    <Menu fixed="top" inverted compact icon="labeled">
+      <Container>
+        <Menu.Item as="a" header href="/">
+          <Header
+            as="h2"
+            inverted
+            color="white"
+            style={{ marginTop: "0.2em" }}
+          >
+            <Image
+              size=""
+              src="./assets/logo.png"
+              style={{ marginBottom: "-0.3em", marginTop: "-0.5em" }}
+            />
+            ScoreSocial
+          </Header>
+        </Menu.Item>
+        <Menu.Item name="points" href="/points" position="right">
+          <Icon name="gem" />
+          50 Points Left
+        </Menu.Item>
+        <Menu.Item name="username" href="/username">
+          <Icon name="user circle" />
+          Username
+        </Menu.Item>
+        {Auth.loggedIn() ? (
+          <Menu.Item name="logout" href="/" onClick={Auth.logout}>
+            <Icon name="sign out alternate" />
+            Logout
+          </Menu.Item>
+        ) : (
+          <>
+            <Menu.Item name="Login" href="/login">
+              <Icon name="sign in alternate" />
+              Login
+            </Menu.Item>
+            <Menu.Item name="Signup" href="/signup">
+              <Icon name="sign out alternate" />
+              Sign-up
+            </Menu.Item>
+          </>
+        )}
+      </Container>
+    </Menu>
+  );
+};
 
-export default Header;
-
+export default SSHeader;

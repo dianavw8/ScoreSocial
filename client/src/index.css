@@ -1,7 +1,7 @@
 html,
 body {
   font-family: 'Rubik', sans-serif;
-  background-color: rgb(32, 32, 32)
+  background-color: #202020
 }
 
 .ui.inverted.top.fixed.menu {
@@ -24,4 +24,18 @@ h6 {
 .small {
   font-weight: 300;
   font-style: italic;
+}
+
+.centered-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 300px;
+  text-align: -webkit-center;
+}
+
+.red-text{
+  color: red;
+  font-size: large;
 }

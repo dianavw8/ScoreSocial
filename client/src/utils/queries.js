@@ -1,22 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const GET_ME = gql`
-  query {
-    me {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        title
-        authors
-        description
-        image
-        link
-      }
-    }
-  }
-`;
 
 export const GET_USER = gql`
   query getUser($username: String!) {
@@ -28,12 +11,10 @@ export const GET_USER = gql`
   }
 `;
 
-export const GET_BOOKS = gql`
-  query getBooks {
-    books {
-      bookId
-      title
-      authors
+export const GET_USER_POINTS = gql`
+  query GetUserPoints($userId: ID!) {
+    user(id: $userId) {
+      pointsEarned
     }
   }
 `;
@@ -46,5 +27,25 @@ export const GET_ODDS = gql`
     commence_time 
     home_team
     away_team
+  }
+`;
+
+export const GET_ODDS = gql`
+  query gameOdds {
+    id
+    sport_key
+    sport_title
+    commence_time 
+    home_team
+    away_team
+  }
+`;
+
+export const GET_USER_PROFILE = gql`
+  query GetUserProfile($userId: ID!) {
+    user(id: $userId) {
+      username
+      email
+    }
   }
 `;

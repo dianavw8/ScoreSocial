@@ -2,7 +2,11 @@ import React from 'react';
 
 const Nba = () => {
     return (
-        <p>Nba</p>
+        <>
+        <div className="centered-text">
+            <h1>National Basketball League</h1>
+        </div>
+      </>
     )
 }
 
