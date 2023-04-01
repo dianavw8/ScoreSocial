@@ -53,7 +53,6 @@ export default class Navbar extends Component {
                 <Menu.Item
                   name="NFL"
                   as="h4"
-                  href="/nfl"
                   inverted
                   color="teal"
                   active={activeItem === "NFL"}
@@ -65,7 +64,6 @@ export default class Navbar extends Component {
                 <Menu.Item
                   name="MLB"
                   as="h4"
-                  href="/mlb"
                   inverted
                   color="teal"
                   active={activeItem === "MLB"}
@@ -77,7 +75,6 @@ export default class Navbar extends Component {
                 <Menu.Item
                   name="English Premier League"
                   as="h4"
-                  href="/engPremierLeague"
                   inverted
                   color="teal"
                   active={activeItem === "English Premier League"}
@@ -89,7 +86,6 @@ export default class Navbar extends Component {
                 <Menu.Item
                   name="NBA"
                   as="h4"
-                  href="/nba"
                   inverted
                   color="teal"
                   active={activeItem === "NBA"}
@@ -101,7 +97,6 @@ export default class Navbar extends Component {
                 <Menu.Item
                   name="NHL"
                   as="h4"
-                  href="/nhl"
                   inverted
                   color="teal"
                   active={activeItem === "NHL"}
