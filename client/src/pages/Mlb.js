@@ -1,17 +1,27 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import API from '../utils/API';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import API from "../utils/API";
+import { GET_ODDS, GET_SCORES } from "../utils/queries";
 
 const Mlb = () => {
-    // const [games, setGames] = useState('');
+  const [sport, setSport] = useState("");
 
-    // API.getGames()
-    //     .then((res) => console.log(res.data))
-    //     .catch((err) => console.log(err));
+  console.log(sport);
+  useEffect(() => {
+    setSport("baseball_mlb");
+  });
 
-    // useEffect(() => {
-    //     getGames('MLB');
-    // }, []);
+  //   function setSportQuery(sport) {
+  //     setSport(sport);
+  //   }
+
+  const { loading, data } = useQuery(GET_ODDS, {
+    // need to set the sport_key: whatever staate variable we createed to hold the sport_key of what sport we are looking for the games for
+    variables: { sport_key: sport },
+  });
+  console.log(data);
+
 
     return (
         <>
@@ -21,6 +31,5 @@ const Mlb = () => {
       </>
     )
 }
-
 
 export default Mlb;
