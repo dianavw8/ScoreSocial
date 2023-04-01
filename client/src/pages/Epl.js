@@ -18,6 +18,13 @@ const Epl = () => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
 
+  function formatDate(dateStr) {
+    const dateObj = new Date(dateStr);
+    const formattedDate = dateObj.toLocaleDateString("en-US");
+    const formattedTime = dateObj.toLocaleTimeString("en-US");
+    return `${formattedDate} ${formattedTime}`;
+  }
+
   return (
     <>
       <div className="centered-text">
@@ -26,10 +33,8 @@ const Epl = () => {
           {gameOdds?.map((odds) => (
             <button>
               <ul key={odds.id}>
-                <li>
-                  {odds.home_team} vs. {odds.away_team}
-                </li>
-                <li>Start Time: {odds.commence_time}</li>
+                <li>{odds.home_team} vs. {odds.away_team}</li>
+                <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
           ))}

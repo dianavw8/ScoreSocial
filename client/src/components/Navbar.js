@@ -13,6 +13,7 @@ import Nfl from "../pages/Nfl";
 import Nhl from "../pages/Nhl";
 import Epl from "../pages/Epl";
 
+
 export default class Navbar extends Component {
   state = { activeItem: "NFL" };
 
@@ -41,6 +42,7 @@ export default class Navbar extends Component {
       default:
         content = <Nfl />;
     }
+    
 
     return (
       <Container>
