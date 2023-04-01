@@ -17,13 +17,28 @@ const Mlb = () => {
   }
   
   const gameOdds = data?.gameOdds;
-  console.log(gameOdds)
+  console.log(gameOdds) 
+
+  function formatDate(dateStr) {
+    const dateObj = new Date(dateStr);
+    const formattedDate = dateObj.toLocaleDateString('en-US');
+    const formattedTime = dateObj.toLocaleTimeString('en-US');
+    return `${formattedDate} ${formattedTime}`;
+  }
+
   return (
     <>
       <div className="centered-text">
         <h1>Major League Baseball</h1>
         {gameOdds.map((odds) => (
-          <p>{odds.home_team}</p>
+          
+          <ul>
+            <title>{odds.sport_title}</title>
+            <p>{odds.commence_time}</p>
+            <p>{odds.home_team}</p>
+            <p>{odds.away_team}</p>
+          </ul>
+          
         ))}
       </div>
     </>
