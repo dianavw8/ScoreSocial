@@ -2,9 +2,7 @@ import React, { useState, Component } from "react";
 import {
   Container,
   Grid,
-  Header,
   Icon,
-  Image,
   Menu,
   Segment,
 } from "semantic-ui-react";
