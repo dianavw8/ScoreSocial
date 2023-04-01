@@ -71,7 +71,7 @@ const LoginForm = () => {
               required
             />
 
-            <Button color='dark purple' fluid size='large' type='submit'>
+            <Button color='teal' fluid size='large' type='submit'>
               Login
             </Button>
           </Segment>
