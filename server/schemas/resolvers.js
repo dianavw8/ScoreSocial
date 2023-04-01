@@ -2,7 +2,6 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { secret, expiration } = require("./config"); // import your config file with secret and expiration values
 require("dotenv").config();
-// const baseUrl = 'https://api.the-odds-api.com/v4/sports/baseball_mlb/odds/?'
 
 const { User } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
@@ -26,10 +25,16 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).select("-__v -password");
     },
-    gameOdds: async () => {
-      console.log("Hello friend!");
+    gameOdds: async (parent, { sport }) => {
       const { data } = await axios(
-        `https://api.the-odds-api.com/v4/sports/baseball_mlb/odds/?regions=us&daysFrom=1&apiKey=${process.env.API_KEY}`
+        `https://api.the-odds-api.com/v4/sports/${sport}/odds/?regions=us&daysFrom=1&apiKey=${process.env.API_KEY}`
+      );
+
+      return data;
+    },
+    gameScores: async (sport) => {
+      const { data } = await axios(
+        `https://api.the-odds-api.com/v4/sports/${sport}/scores/?daysFrom=1&apiKey=${process.env.API_KEY}`
       );
 
       return data;
@@ -64,7 +69,7 @@ const resolvers = {
       await dataSources.usersAPI.deleteAuthToken();
 
       // Return a success message
-      return { message: 'Logged out successfully' };
+      return { message: "Logged out successfully" };
     },
   },
 };

@@ -40,6 +40,23 @@ const typeDefs = gql`
     away_team: String
   }
 
+  type Score {
+  name: String
+  score: String
+  }
+
+  type gameScores {
+  id: String
+  sport_key: String
+  sport_title: String
+  commence_time: String
+  completed: Boolean
+  home_team: String
+  away_team: String
+  scores: [Score]
+  last_update:String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -53,7 +70,8 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    gameOdds: [gameOdds!]!
+    gameOdds(sport: String!): [gameOdds!]!
+    gameScores(sport: String!): [gameScores!]!
   }
 
   type Mutation {
