@@ -17,10 +17,22 @@ const Nba = () => {
     }
    const gameOdds = data?.gameOdds
    console.log(gameOdds)
+
+
     return (
         <>
         <div className="centered-text">
             <h1>National Basketball League</h1>
+            <div>
+          {gameOdds?.map((odds) => (
+            <button>
+              <ul key={odds.id}>
+                <li>{odds.home_team} vs. {odds.away_team}</li>
+                <li>Start Time: {odds.commence_time}</li>
+              </ul>
+            </button>
+          ))}
+        </div>
         </div>
       </>
     )
