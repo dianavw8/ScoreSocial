@@ -50,10 +50,11 @@ const SignupForm = () => {
           <Image style={{ width: '90px', height: '80px' }} src='./assets/logo2.png' alt='logo' /> Create an Account
         </Header>
         <Form size='large' noValidate validated={validated} onSubmit={handleFormSubmit}>
-          <Message dismissible onClose={() => setShowAlert(false)} show={showAlert} negative>
-            Something went wrong with your signup!
-          </Message>
-
+          {showAlert && (
+            <Message onDismiss={() => setShowAlert(false)}>
+              <p class="red-text">Something went wrong with your signup!</p>
+            </Message>
+          )}
           <Segment stacked>
             <Form.Input
               fluid

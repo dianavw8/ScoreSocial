@@ -42,10 +42,11 @@ const LoginForm = () => {
           <Image style={{ width: '90px', height: '80px' }} src='./assets/logo2.png' alt='logo' /> Log-in to your account
         </Header>
         <Form size='large' onSubmit={handleFormSubmit}>
-          <Message dismissible onClose={() => setShowAlert(false)} show={showAlert} negative>
-            Something went wrong with your login!
-          </Message>
-
+        {showAlert && (
+            <Message onDismiss={() => setShowAlert(false)}>
+              <p class="red-text">Something went wrong with your login!</p>
+            </Message>
+          )}
           <Segment stacked>
             <Form.Input
               fluid
