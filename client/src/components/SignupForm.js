@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-//import { Form, Button, Alert } from 'react-bootstrap';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -31,7 +29,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: userFormData,
       });
-      
+
       Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
@@ -46,70 +44,58 @@ const SignupForm = () => {
   };
 
   return (
-    <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Message dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Message>
+    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='grey' textAlign='center'>
+          <Image style={{ width: '90px', height: '80px' }} src='./assets/logo2.png' alt='logo' /> Create an Account
+        </Header>
+        <Form size='large' noValidate validated={validated} onSubmit={handleFormSubmit}>
+          <Message dismissible onClose={() => setShowAlert(false)} show={showAlert} negative>
+            Something went wrong with your signup!
+          </Message>
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
+          <Segment stacked>
+            <Form.Input
+              fluid
+              icon='user'
+              iconPosition='left'
+              placeholder='Username'
+              name='username'
+              onChange={handleInputChange}
+              value={userFormData.username}
+              required
+            />
+            <Form.Input
+              fluid
+              icon='mail'
+              iconPosition='left'
+              placeholder='E-mail address'
+              type='email'
+              name='email'
+              onChange={handleInputChange}
+              value={userFormData.email}
+              required
+            />
+            <Form.Input
+              fluid
+              icon='lock'
+              iconPosition='left'
+              placeholder='Password'
+              type='password'
+              name='password'
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+            />
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
-    </>
+            <Button color='dark purple' fluid size='large' type='submit' disabled={!(userFormData.username && userFormData.email && userFormData.password)}>
+              Sign Up!
+            </Button>
+          </Segment>
+        </Form>
+      </Grid.Column>
+    </Grid>
   );
 };
 
 export default SignupForm;
-
-
-
-
-
-
-
-
-
-
-
