@@ -1,13 +1,12 @@
-//import axios from 'axios';
+import axios from 'axios';
 
 // route to get logged in user's info (needs the token)
-export const getMe = (token) => {
-  return fetch('/api/users/me', {
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-  });
+export const getScores = (name) => {
+  return "place holders";
+};
+
+export const getOdds = (name) => {
+  return "place holders";
 };
 
 export const createUser = (userData) => {
@@ -30,25 +29,25 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
-export const saveBook = (bookData, token) => {
-  return fetch('/api/users', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(bookData),
-  });
-};
+// // save book data for a logged in user
+// export const saveBook = (bookData, token) => {
+//   return fetch('/api/users', {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify(bookData),
+//   });
+// };
 
-// remove saved book data for a logged in user
-export const deleteBook = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-};
+// // remove saved book data for a logged in user
+// export const deleteBook = (bookId, token) => {
+//   return fetch(`/api/users/books/${bookId}`, {
+//     method: 'DELETE',
+//     headers: {
+//       authorization: `Bearer ${token}`,
+//     },
+//   });
+// };
 

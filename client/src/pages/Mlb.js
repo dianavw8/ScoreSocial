@@ -14,8 +14,11 @@ const Mlb = () => {
     // }, []);
 
     return (
-
-        <p>Mlb</p>
+        <>
+        <div className="centered-text">
+            <h1>Major League Baseball</h1>
+        </div>
+      </>
     )
 }
 
