@@ -40,3 +40,27 @@ const Epl = () => {
 };
 
 export default Epl;
+
+
+//   const gameOdds = data?.gameOdds;
+//   console.log(gameOdds)
+
+//   const handleItemClick = (item) => {
+//     selectedItem(item);
+//   }
+
+//   return (
+//     <>
+//       <div className="centered-text">
+//         <h1>English Premier League</h1>
+//         <ul key={odds.id}>
+//           {sport.map((item) => (
+//             <li onClick={() => handleItemClick(item)}>
+//               {item.name}
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </>
+//   )
+// }
