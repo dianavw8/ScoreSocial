@@ -89,7 +89,7 @@ const SignupForm = () => {
               required
             />
 
-            <Button color='dark purple' fluid size='large' type='submit' disabled={!(userFormData.username && userFormData.email && userFormData.password)}>
+            <Button color='teal' fluid size='large' type='submit' disabled={!(userFormData.username && userFormData.email && userFormData.password)}>
               Sign Up!
             </Button>
           </Segment>

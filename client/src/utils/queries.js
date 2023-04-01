@@ -20,24 +20,31 @@ export const GET_USER_POINTS = gql`
 `;
 
 export const GET_ODDS = gql`
-  query gameOdds {
-    id
-    sport_key
-    sport_title
-    commence_time 
-    home_team
-    away_team
+  query gameOdds($sport_key: String) {
+    gameOdds(sport_key: $sport_key) {
+      id
+      sport_key
+      sport_title
+      commence_time 
+      home_team
+      away_team
+    }
   }
 `;
 
-export const GET_ODDS = gql`
-  query gameOdds {
-    id
-    sport_key
-    sport_title
-    commence_time 
-    home_team
-    away_team
+export const GET_SCORES = gql`
+  query gameScores($sport_key: String) {
+    gameScores(sport_key: $sport_key) {
+      id
+      sport_key
+      sport_title
+      commence_time 
+      completed
+      home_team
+      away_team
+      scores
+      last_update
+    }
   }
 `;
 

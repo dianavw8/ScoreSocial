@@ -113,7 +113,6 @@ export default class Navbar extends Component {
               <Segment>{content}</Segment>
             </Grid.Column>
           </Grid>
->>>>>>> 1b6803ba38dfd8845821649d3389f5a40a3563e3
         </Container>
       </Container>
     );
