@@ -1,4 +1,7 @@
 import React from 'react';
+import { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ODDS, GET_SCORES } from "../utils/queries";
 
 const Epl = () => {
     const [sport, setSport] = useState("soccer_usa_mls");
