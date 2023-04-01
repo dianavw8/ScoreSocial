@@ -52,7 +52,7 @@ const SignupForm = () => {
         <Form size='large' noValidate validated={validated} onSubmit={handleFormSubmit}>
           {showAlert && (
             <Message onDismiss={() => setShowAlert(false)}>
-              <p class="red-text">Something went wrong with your signup!</p>
+              <p className="red-text">Something went wrong with your signup!</p>
             </Message>
           )}
           <Segment stacked>
