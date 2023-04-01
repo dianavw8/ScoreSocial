@@ -25,7 +25,7 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).select("-__v -password");
     },
-    gameOdds: async (sport) => {
+    gameOdds: async (parent, { sport }) => {
       const { data } = await axios(
         `https://api.the-odds-api.com/v4/sports/${sport}/odds/?regions=us&daysFrom=1&apiKey=${process.env.API_KEY}`
       );
@@ -34,12 +34,7 @@ const resolvers = {
     },
     gameScores: async (sport) => {
       const { data } = await axios(
-        ` https://api.the-odds-api.com/v4/sports/baseball_mlb/scores/?daysFrom=1&apiKey=${process.env.API_KEY}`,
-        {
-          params: {
-            _limit: 10,
-          },
-        }
+        `https://api.the-odds-api.com/v4/sports/${sport}/scores/?daysFrom=1&apiKey=${process.env.API_KEY}`
       );
 
       return data;
@@ -74,7 +69,7 @@ const resolvers = {
       await dataSources.usersAPI.deleteAuthToken();
 
       // Return a success message
-      return { message: 'Logged out successfully' };
+      return { message: "Logged out successfully" };
     },
   },
 };

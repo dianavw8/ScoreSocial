@@ -70,8 +70,8 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    gameOdds: [gameOdds!]!
-    gameScores: [gameScores!]!
+    gameOdds(sport: String!): [gameOdds!]!
+    gameScores(sport: String!): [gameScores!]!
   }
 
   type Mutation {
