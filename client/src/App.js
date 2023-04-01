@@ -41,14 +41,14 @@ function App() {
     <ApolloProvider client={client}>
         <>
           <SSHeader />
-          <BrowserRouter>
+          <HashRouter>
             <Route exact path="/" component={Main} />
             <Route exact path="/points" component={Points} />
             <Route exact path="/username" component={Username} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/signup" component={SignupForm} />
             <Route exact path="/profile" component={Profile} />
-          </BrowserRouter>
+          </HashRouter>
         </>
     </ApolloProvider>
   );
