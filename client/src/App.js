@@ -40,17 +40,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-      <>
           <SSHeader />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route exact path="/points" component={Points} />
-            <Route exact path="/username" component={Username} />
-            <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/signup" component={SignupForm} />
-            <Route exact path="/profile" component={Profile} />
+            <Route path="/points" component={Points} />
+            <Route path="/username" component={Username} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/signup" component={SignupForm} />
+            <Route path="/profile" component={Profile} />
           </Switch>
-        </>
       </BrowserRouter>
     </ApolloProvider>
   );
