@@ -1,5 +1,4 @@
 import React, { useState, Component } from "react";
-import { Link } from "react-router-dom";
 import {
   Container,
   Grid,
@@ -9,9 +8,12 @@ import {
   Menu,
   Segment,
 } from "semantic-ui-react";
-import SignUpForm from "./SignupForm";
-import LoginForm from "./LoginForm";
-import Auth from "../utils/auth";
+
+import Mlb from "../pages/Mlb";
+import Nba from "../pages/Nba";
+import Nfl from "../pages/Nfl";
+import Nhl from "../pages/Nhl";
+import Epl from "../pages/Epl";
 
 export default class Navbar extends Component {
   state = { activeItem: "NFL" };
@@ -20,6 +22,27 @@ export default class Navbar extends Component {
 
   render() {
     const { activeItem } = this.state;
+
+    let content;
+    switch (activeItem) {
+      case "NFL":
+        content = <Nfl/>;
+        break;
+      case "MLB":
+        content = <Mlb />;
+        break;
+      case "English Premier League":
+        content = <Epl />;
+        break;
+      case "NBA":
+        content = <Nba />;
+        break;
+      case "NHL":
+        content = <Nhl />;
+        break;
+      default:
+        content = <Nfl />;
+    }
 
     return (
       <Container>
@@ -92,7 +115,7 @@ export default class Navbar extends Component {
 
             {/* Just for show, need API info */}
             <Grid.Column stretched width={13}>
-              <Segment>Sports Stuff...</Segment>
+              <Segment>{content}</Segment>
             </Grid.Column>
           </Grid>
         </Container>

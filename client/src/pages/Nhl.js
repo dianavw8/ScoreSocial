@@ -3,10 +3,11 @@ import { getOdds, getScores } from '../utils/API';
 
 const Nhl = () => {
     return (
-     
-        <div>
-               <p>Nhl</p>
+        <>
+        <div className="centered-text">
+            <h1>National Hockey League</h1>
         </div>
+      </>
     )
 }
 

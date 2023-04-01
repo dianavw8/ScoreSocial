@@ -1,9 +1,5 @@
-import { Link } from 'react-router-dom';
 import React from "react";
-// import Axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
-
 
 const Main = () => {
     return (

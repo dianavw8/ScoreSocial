@@ -1,8 +1,6 @@
 import React from "react";
 // import Axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Friends from "./components/Friends";
-import Navbar from "./components/Navbar";
 import SSHeader from "./components/Header";
 import Profile from "./pages/Profile";
 import Username from "./pages/Username";
