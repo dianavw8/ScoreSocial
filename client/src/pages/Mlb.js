@@ -5,31 +5,29 @@ import API from "../utils/API";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
 
 const Mlb = () => {
-  const [sport, setSport] = useState("");
-
+  const [sport, setSport] = useState("baseball_mlb");
   console.log(sport);
-  useEffect(() => {
-    setSport("baseball_mlb");
-  });
-
-  //   function setSportQuery(sport) {
-  //     setSport(sport);
-  //   }
 
   const { loading, data } = useQuery(GET_ODDS, {
     // need to set the sport_key: whatever staate variable we createed to hold the sport_key of what sport we are looking for the games for
-    variables: { sport_key: sport },
+    variables: { sport },
   });
-  console.log(data);
-
-
-    return (
-        <>
-        <div className="centered-text">
-            <h1>Major League Baseball</h1>
-        </div>
-      </>
-    )
-}
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+  
+  const gameOdds = data?.gameOdds;
+  console.log(gameOdds)
+  return (
+    <>
+      <div className="centered-text">
+        <h1>Major League Baseball</h1>
+        {gameOdds.map((odds) => (
+          <p>{odds.home_team}</p>
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default Mlb;

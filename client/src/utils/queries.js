@@ -20,16 +20,16 @@ export const GET_USER_POINTS = gql`
 `;
 
 export const GET_ODDS = gql`
-  query gameOdds($sport_key: String) {
-    gameOdds(sport_key: $sport_key) {
-      id
-      sport_key
-      sport_title
-      commence_time 
-      home_team
-      away_team
-    }
+query GameOdds($sport: String!) {
+  gameOdds(sport: $sport) {
+    id
+    sport_key
+    sport_title
+    commence_time
+    home_team
+    away_team
   }
+}
 `;
 
 export const GET_SCORES = gql`
