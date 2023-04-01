@@ -30,7 +30,7 @@ export const ADD_USER = gql`
 export const LOGOUT_USER = gql`
   mutation LogoutUser {
     logout {
-      "You have successfully logged out"
+      message
     }
   }
 `;
