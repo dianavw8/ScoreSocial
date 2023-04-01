@@ -14,7 +14,7 @@ export const GET_USER = gql`
 export const GET_USER_POINTS = gql`
   query GetUserPoints($userId: ID!) {
     user(id: $userId) {
-      pointsEarned
+      currentPoints
     }
   }
 `;
