@@ -15,10 +15,10 @@ const Header = ({ pointsEarned, userProfile, loginForm, onLogout }) => {
           ) : (
             <React.Fragment>
               <li>
-                <Link to="/login">Log In</Link>
+                <Link to="/login"></Link>
               </li>
               <li>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/signup"></Link>
               </li>
             </React.Fragment>
           )}

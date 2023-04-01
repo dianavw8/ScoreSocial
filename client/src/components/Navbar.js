@@ -58,7 +58,7 @@ export default class Navbar extends Component {
               <>
                 <Menu.Item
                   name="logout"
-                  href="/login"
+                  href="/loginform"
                   onClick={this.handleItemClick}
                 >
                   <Icon name="sign out alternate" />
@@ -69,7 +69,7 @@ export default class Navbar extends Component {
               <>
                 <Menu.Item
                   name="Login"
-                  href="/login"
+                  href="/loginform"
                   onClick={this.handleItemClick}
                 >
                   <Icon name="sign in alternate" />
@@ -77,7 +77,7 @@ export default class Navbar extends Component {
                 </Menu.Item>
                 <Menu.Item
                   name="Signup"
-                  href="/signup"
+                  href="/signupform"
                   onClick={this.handleItemClick}
                 >
                   <Icon name="sign out alternate" />
