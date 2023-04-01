@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
@@ -16,27 +16,51 @@ const Epl = () => {
   }
 
   const gameOdds = data?.gameOdds;
-  console.log(gameOdds)
-
-  const handleItemClick = (item) => {
-    selectedItem(item);
-  }
+  console.log(gameOdds);
 
   return (
     <>
       <div className="centered-text">
         <h1>English Premier League</h1>
-        <ul>
-          {sport.map((item) => (
-            <li key={item.id} onClick={() => handleItemClick(item)}>
-              {item.name}
-            </li>
+        <div>
+          {gameOdds?.map((odds) => (
+            <button>
+              <ul key={odds.id}>
+                <li>
+                  {odds.home_team} vs. {odds.away_team}
+                </li>
+                <li>Start Time: {odds.commence_time}</li>
+              </ul>
+            </button>
           ))}
-        </ul>
+        </div>
       </div>
     </>
-  )
-}
-
+  );
+};
 
 export default Epl;
+
+
+//   const gameOdds = data?.gameOdds;
+//   console.log(gameOdds)
+
+//   const handleItemClick = (item) => {
+//     selectedItem(item);
+//   }
+
+//   return (
+//     <>
+//       <div className="centered-text">
+//         <h1>English Premier League</h1>
+//         <ul key={odds.id}>
+//           {sport.map((item) => (
+//             <li onClick={() => handleItemClick(item)}>
+//               {item.name}
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </>
+//   )
+// }

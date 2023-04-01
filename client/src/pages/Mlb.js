@@ -15,14 +15,22 @@ const Mlb = () => {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-  
+
   const gameOdds = data?.gameOdds;
-  console.log(gameOdds) 
+  console.log(gameOdds);
+  
+  // if(gameOdds === []) {
+  //   return (
+  //       <>
+  //       <h1>There are no upcoming games.</h1>
+  //       </>
+  //   )
+  //  }
 
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
-    const formattedDate = dateObj.toLocaleDateString('en-US');
-    const formattedTime = dateObj.toLocaleTimeString('en-US');
+    const formattedDate = dateObj.toLocaleDateString("en-US");
+    const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
 
@@ -30,16 +38,16 @@ const Mlb = () => {
     <>
       <div className="centered-text">
         <h1>Major League Baseball</h1>
-        {gameOdds.map((odds) => (
-          
-          <ul>
-            <title>{odds.sport_title}</title>
-            <p>{odds.commence_time}</p>
-            <p>{odds.home_team}</p>
-            <p>{odds.away_team}</p>
-          </ul>
-          
-        ))}
+        <div>
+          {gameOdds?.map((odds) => (
+            <button>
+              <ul key={odds.id}>
+                <li>{odds.home_team} vs. {odds.away_team}</li>
+                <li>Start Time: {odds.commence_time}</li>
+              </ul>
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );

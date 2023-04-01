@@ -18,21 +18,38 @@ const Nba = () => {
    const gameOdds = data?.gameOdds
    console.log(gameOdds)
 
-   const handleItemClick = (item) => {
-    selectedItem(item);
-}
+// <<<<<<< featureBrandon10
+//    const handleItemClick = (item) => {
+//     selectedItem(item);
+// }
+// =======
+// >>>>>>> main
 
     return (
         <>
         <div className="centered-text">
-            <h1>National Basketball Association</h1>
-            <ul>
-                    {sport.map((item) => (
-                        <li key={item.id} onClick={() => handleItemClick(item)}>
-                            {item.name}
-                        </li>
-                    ))}
-                </ul>
+// <<<<<<< featureBrandon10
+//             <h1>National Basketball Association</h1>
+//             <ul>
+//                     {sport.map((item) => (
+//                         <li key={item.id} onClick={() => handleItemClick(item)}>
+//                             {item.name}
+//                         </li>
+//                     ))}
+//                 </ul>
+// =======
+            <h1>National Basketball League</h1>
+            <div>
+          {gameOdds?.map((odds) => (
+            <button>
+              <ul key={odds.id}>
+                <li>{odds.home_team} vs. {odds.away_team}</li>
+                <li>Start Time: {odds.commence_time}</li>
+              </ul>
+            </button>
+          ))}
+        </div>
+
         </div>
       </>
     )
