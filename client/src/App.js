@@ -1,11 +1,12 @@
 import React from "react";
 // import Axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Switch, Route, HashRouter } from "react-router-dom";
 import SSHeader from "./components/Header";
 import Profile from "./pages/Profile";
 import Username from "./pages/Username";
 import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -38,7 +39,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <HashRouter >
         <>
           <SSHeader />
           <Switch>
@@ -48,10 +49,9 @@ function App() {
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/signup" component={SignupForm} />
             <Route exact path="/profile" component={Profile} />
-            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>
-      </Router>
+      </HashRouter >
     </ApolloProvider>
   );
 }
