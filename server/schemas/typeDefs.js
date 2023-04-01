@@ -17,7 +17,7 @@ const typeDefs = gql`
     password: String!
     friends: [String]
     activeBets: [String]
-    pointsEarned: Int
+    currentPoints: Int
     betHistory: [String]
     profile: Profile
   }
