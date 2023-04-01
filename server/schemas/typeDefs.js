@@ -54,7 +54,7 @@ const typeDefs = gql`
   home_team: String
   away_team: String
   scores: [Score]
-  last_update: tring
+  last_update: String
   }
 
   type Auth {
