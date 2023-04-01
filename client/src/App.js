@@ -1,11 +1,12 @@
 import React from "react";
 // import Axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Route, HashRouter, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import SSHeader from "./components/Header";
 import Profile from "./pages/Profile";
 import Username from "./pages/Username";
 import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -38,20 +39,17 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <>
+      <BrowserRouter>
           <SSHeader />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route exact path="/points" component={Points} />
-            <Route exact path="/username" component={Username} />
-            <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/signup" component={SignupForm} />
-            <Route exact path="/profile" component={Profile} />
-            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+            <Route path="/points" component={Points} />
+            <Route path="/username" component={Username} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/signup" component={SignupForm} />
+            <Route path="/profile" component={Profile} />
           </Switch>
-        </>
-      </Router>
+      </BrowserRouter>
     </ApolloProvider>
   );
 }
