@@ -25,3 +25,11 @@ h6 {
   font-weight: 300;
   font-style: italic;
 }
+
+.centered-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: -webkit-center;
+}
