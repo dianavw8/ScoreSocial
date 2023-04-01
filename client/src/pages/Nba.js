@@ -7,6 +7,7 @@ const Nba = ({ selected, setSelected }) => {
   const [sport, setSport] = useState("basketball_nba");
   console.log(sport);
 
+
   const { loading, data } = useQuery(GET_ODDS, {
     // need to set the sport_key: whatever staate variable we createed to hold the sport_key of what sport we are looking for the games for
     variables: { sport },
@@ -27,9 +28,9 @@ const Nba = ({ selected, setSelected }) => {
 
   return (
     <>
-
         <h1>National Basketball League</h1>
         <div>
+
           {gameOdds?.map((odds) => (
             <button>
               <ul key={odds.id}>
