@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import Auth from "../utils/auth";
 
-const SSHeader = ({ pointsEarned, userProfile, loginForm, onLogout }) => {
+const SSHeader = ({ currentPoints, userProfile, loginForm, onLogout }) => {
 
   return (
     <Menu fixed="top" inverted compact icon="labeled">
