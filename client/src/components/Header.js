@@ -1,4 +1,5 @@
 import React, { useState, Component } from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Grid,
@@ -15,7 +16,7 @@ const SSHeader = ({ pointsEarned, userProfile, loginForm, onLogout }) => {
   return (
     <Menu fixed="top" inverted compact icon="labeled">
       <Container>
-        <Menu.Item as="a" header href="/">
+        <Menu.Item as={Link} to="/">
           <Header
             as="h2"
             inverted
@@ -30,26 +31,26 @@ const SSHeader = ({ pointsEarned, userProfile, loginForm, onLogout }) => {
             ScoreSocial
           </Header>
         </Menu.Item>
-        <Menu.Item name="points" href="/points" position="right">
+        <Menu.Item name="points" as={Link} to="/points" position="right">
           <Icon name="gem" />
           50 Points Left
         </Menu.Item>
-        <Menu.Item name="username" href="/username">
+        <Menu.Item name="username" as={Link} to="/username">
           <Icon name="user circle" />
           Username
         </Menu.Item>
         {Auth.loggedIn() ? (
-          <Menu.Item name="logout" href="/" onClick={Auth.logout}>
+          <Menu.Item name="logout" as={Link} to="/" onClick={Auth.logout}>
             <Icon name="sign out alternate" />
             Logout
           </Menu.Item>
         ) : (
           <>
-            <Menu.Item name="Login" href="/login">
+            <Menu.Item name="Login" as={Link} to="/login">
               <Icon name="sign in alternate" />
               Login
             </Menu.Item>
-            <Menu.Item name="Signup" href="/signup">
+            <Menu.Item name="Signup" as={Link} to="/signup">
               <Icon name="sign out alternate" />
               Sign-up
             </Menu.Item>
