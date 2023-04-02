@@ -1,59 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Form, Message, } from 'semantic-ui-react';
-import { useMutation } from '@apollo/client';
-import { REDUCE_POINTS } from '../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import Auth from '../utils/auth'
+import { UPDATE_POINTS } from '../utils/mutations';
+import { GET_USER } from '../utils/queries';
+// import { User } from '../../../server/models';
 
-const PointsForm = () => {
-    const [pointsFormData, setPointsFormData] = useState({pointsUsed: ' '})
-    const [showAlert, setShowAlert] = useState(false);
 
-    const [reducePoints, { error }] = useMutation(REDUCE_POINTS);
+const UpdatePoints = (props) => {
+    const [addPoints, setAddPoints] = useState(0)
+    const [usePoints, setUsePoints] = useState(0)
+    // const profileData = Auth.getProfile();
+    // const {username, id, points} = profileData.data
+    // const usernamestr = `${username}`
+    // // const userId = User.findById(id)
+    // // console.log(userId)
+    const { loading, data } = useQuery(GET_USER, {
+      variables: { username: 'Logan2' },
+    });
+    console.log(data?.user)
+    const username = props.username
+    const points = props.points
+    // const { me } = data
+    // const { id, username, email, points} = me;
+    // console.log(username)
+    const [updatePoints, { loading: updateLoading, error: updateError }] = useMutation(UPDATE_POINTS);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setPointsFormData({ pointsFormData, [name]: value });
-    };
-
-    const handleFormSubmit = async (event) => {
+     const handlePointsClick = (points) => {
+    setAddPoints(points);
+    updatePoints({ variables: { username, points } }).then((result) => {
+      console.log(result.data.updateUser.user.points);
+      setAddPoints(0);
+    });
+  };
+    const handleUsePointsSubmit = async (event) => {
         event.preventDefault();
-    
-        try {
-            const { data } = await reducePoints({
-                variables: pointsFormData,
-              });
-        // check that points used to bet is less than currentPoints
-        // check that number isn't negative
-        } catch (err) {
-          console.error(err);
-          setShowAlert(true);
-        }
-    
-        setPointsFormData({
-          pointsUsed: ''
+        const input = {
+          points: -usePoints
+        };
+        updatePoints({variables: { input }})
+        .then(result => {
+          console.log(result.data.updateUser.user.points);
+          setUsePoints(0);
         });
     };
-    return(        
-    <Form size='large' onSubmit={handleFormSubmit}>
-    {showAlert && (
-        <Message onDismiss={() => setShowAlert(false)}>
-          <p class="red-text">Something went wrong with your login!</p>
-        </Message>
-      )}
-      <Form.Input
-              fluid
-              icon=''
-              iconPosition='left'
-              placeholder='100'
-              type='value'
-              name='pointsUsed'
-              onChange={handleInputChange}
-              value={pointsFormData.pointsUsed}
-              required
-            />
-            <Button color='teal' fluid size='large' type='submit'>
-              Place your bet!
-            </Button>
-    </Form>
-    );
+    
+// console.log(points)
+    // const user = data;
+// console.log(data)
+    return (
+    <div>
+      <h2>Points: {points}</h2>
+      <h3>Add Points:</h3>
+      <Button.Group>
+        <Button onClick={() => handlePointsClick(10)}>Add 10 Points</Button>
+        <Button onClick={() => handlePointsClick(20)}>Add 20 Points</Button>
+        <Button onClick={() => handlePointsClick(50)}>Add 50 Points</Button>
+      </Button.Group>
+      {updateLoading && <p>Loading...</p>}
+      {updateError && <Message negative>{updateError.message}</Message>}
+      <h3>Use Points:</h3>
+      <form onSubmit={handleUsePointsSubmit}>
+        <label>
+          Points to use:
+          <input type="number" value={usePoints} onChange={(event) => setUsePoints(parseInt(event.target.value))} />
+        </label>
+        <button type="submit">Use Points</button>
+      </form>
+      {updateLoading && <p>Loading...</p>}
+      {updateError && <p>Error: {updateError.message}</p>}
+    </div>
+  );
 };
-export default PointsForm;
+
+
+export default UpdatePoints;

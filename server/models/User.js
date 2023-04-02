@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    currentPoints: {
+    points: {
       type: Number,
       required: true,
     }

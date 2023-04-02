@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import Username from "./pages/Username";
 import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
+import UpdatePoints from "./components/PointsForm";
 
 import {
   ApolloClient,
@@ -48,6 +49,7 @@ function App() {
             <Route path="/login" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
             <Route path="/profile" component={Profile} />
+            <Route path="/pointsform" component={UpdatePoints} />
           </Switch>
       </BrowserRouter>
     </ApolloProvider>

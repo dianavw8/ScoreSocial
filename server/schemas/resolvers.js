@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const { User } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
+const { db } = require("../models/User");
 
 const resolvers = {
   Query: {
@@ -71,16 +72,13 @@ const resolvers = {
       // Return a success message
       return { message: "Logged out successfully" };
     },
-    reducePoints: async (parent, { _id, pointsUsed }, context) => {
-      const user = await User.findById(_id);
-      if (!user) {
-        throw new Error('User not found');
-      }
-    
-      User.currentPoints = User.currentpoints - pointsUsed;
-      await User.save();
-    
-      return User;
+    updatePoints: async (_, { userId, points }) => {
+      const user = await User.findOneAndUpdate(
+        {_id: isValidObjectId(userId)},
+        {$inc: {points: points}},
+        {returnOriginal: false}
+      );
+      return user.value
     },
   },
 };

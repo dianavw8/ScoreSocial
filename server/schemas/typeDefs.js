@@ -17,7 +17,7 @@ const typeDefs = gql`
     password: String!
     friends: [String]
     activeBets: [String]
-    currentPoints: Int
+    points: Int
     betHistory: [String]
     profile: Profile
   }
@@ -62,8 +62,9 @@ const typeDefs = gql`
     user: User
   }
 
-  input currentPointsInput {
-    pointNumber: Int
+  input UpdatePointsInput {
+    id: ID!
+    points: Int!
   }
 
   type Query {
@@ -75,10 +76,10 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!, points: Int = 1000): Auth
     login(email: String!, password: String!): Auth
     logout: LogoutResponse
-    reducePoints(currentPoints: currentPointsInput): User
+    updatePoints(input: UpdatePointsInput): User!
   }
 `;
 
