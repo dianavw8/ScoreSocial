@@ -1,5 +1,4 @@
-import { gql } from '@apollo/client';
-
+import { gql } from "@apollo/client";
 
 export const GET_USER = gql`
   query getUser($username: String!) {
@@ -20,32 +19,74 @@ export const GET_USER_POINTS = gql`
 `;
 
 export const GET_ODDS = gql`
-query GameOdds($sport: String!) {
-  gameOdds(sport: $sport) {
+  query GameOdds($sport: String!) {
+    gameOdds(sport: $sport) {
+      id
+      sport_key
+      sport_title
+      commence_time
+      home_team
+      away_team
+      bookmakers {
+        key
+        title
+        last_update
+        markets {
+          key
+          outcomes {
+            label
+            price
+            points
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SCORES = gql`
+query Query($sport: String!) {
+  gameScores(sport: $sport) {
+    id
+    sport_key
+    sport_title
+    commence_time
+    completed
+    home_team
+    away_team
+    scores {
+      name
+      score
+    }
+    last_update
+  }
+}
+`;
+
+export const GET_SINGLE_ODDS = gql`
+query singleGameOdds($sport: String!, $eventId: String!) {
+  singleGameOdds(sport: $sport, eventId: $eventId) {
     id
     sport_key
     sport_title
     commence_time
     home_team
     away_team
-  }
-}
-`;
-
-export const GET_SCORES = gql`
-  query gameScores($sport_key: String) {
-    gameScores(sport_key: $sport_key) {
-      id
-      sport_key
-      sport_title
-      commence_time 
-      completed
-      home_team
-      away_team
-      scores
+    bookmakers {
+      key
+      title
       last_update
+      markets {
+        key
+        outcomes {
+          label
+          price
+          points
+        }
+      }
     }
   }
+}
 `;
 
 export const GET_USER_PROFILE = gql`

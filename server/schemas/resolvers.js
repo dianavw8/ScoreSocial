@@ -27,17 +27,24 @@ const resolvers = {
     },
     gameOdds: async (parent, { sport }) => {
       const { data } = await axios(
-        `https://api.the-odds-api.com/v4/sports/${sport}/odds/?regions=us&daysFrom=1&apiKey=${process.env.API_KEY}`
+        `https://api.the-odds-api.com/v4/sports/${sport}/odds?apiKey=${process.env.API_KEY}&regions=us&markets=h2h&dateFormat=iso&oddsFormat=decimal`
       );
 
       return data;
     },
-    gameScores: async (sport) => {
+    gameScores: async (parent, { sport }) => {
       const { data } = await axios(
-        `https://api.the-odds-api.com/v4/sports/${sport}/scores/?daysFrom=1&apiKey=${process.env.API_KEY}`
+        `https://api.the-odds-api.com/v4/sports/${sport}/scores?apiKey=${process.env.API_KEY}&daysFrom=1`
       );
 
       return data;
+    },
+    singleGameOdds: async (parent, { sport, eventId }) => {
+      const { data } = await axios(
+        `https://api.the-odds-api.com/v4/sports/${sport}/events/${eventId}/odds?apiKey=${process.env.API_KEY}&regions=us&markets=h2h&dateFormat=iso&oddsFormat=decimal`
+      );
+
+      return [data];
     },
   },
   Mutation: {
@@ -71,17 +78,17 @@ const resolvers = {
       // Return a success message
       return { message: "Logged out successfully" };
     },
-    reducePoints: async (parent, { _id, pointsUsed }, context) => {
-      const user = await User.findById(_id);
-      if (!user) {
-        throw new Error('User not found');
-      }
+    // reducePoints: async (parent, { _id, pointsUsed }, context) => {
+    //   const user = await User.findById(_id);
+    //   if (!user) {
+    //     throw new Error('User not found');
+    //   }
     
-      User.currentPoints = User.currentpoints - pointsUsed;
-      await User.save();
+    //   User.currentPoints = User.currentpoints - pointsUsed;
+    //   await User.save();
     
-      return User;
-    },
+    //   return User;
+    // },
   },
 };
 

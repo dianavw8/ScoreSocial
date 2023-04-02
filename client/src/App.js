@@ -1,11 +1,18 @@
 import React from "react";
-// import Axios from 'axios';
-import { Route, HashRouter, BrowserRouter, Redirect, Switch } from "react-router-dom";
+import { useState } from "react";
+import {
+  Route,
+  HashRouter,
+  BrowserRouter,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 import SSHeader from "./components/Header";
 import Profile from "./pages/Profile";
 import Username from "./pages/Username";
 import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
+import MyContext from "./components/MyContext";
 
 import {
   ApolloClient,
@@ -37,9 +44,11 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [gameId, setGameId] = useState("");
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
+      <MyContext.Provider value={{ gameId, setGameId }}>
+        <BrowserRouter>
           <SSHeader />
           <Switch>
             <Route exact path="/" component={Main} />
@@ -49,7 +58,8 @@ function App() {
             <Route path="/signup" component={SignupForm} />
             <Route path="/profile" component={Profile} />
           </Switch>
-      </BrowserRouter>
+        </BrowserRouter>
+      </MyContext.Provider>
     </ApolloProvider>
   );
 }

@@ -1,11 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import API from "../utils/API";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
+import MyContext from '../components/MyContext';
 
 const Mlb = () => {
   const [sport, setSport] = useState("baseball_mlb");
+  const { gameId, setGameId } = useContext(MyContext);
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -18,14 +19,14 @@ const Mlb = () => {
 
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
-  
-  if(gameOdds === []) {
+
+  if (gameOdds === []) {
     return (
-        <>
+      <>
         <h1>There are no upcoming games.</h1>
-        </>
-    )
-   }
+      </>
+    );
+  }
 
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
@@ -40,9 +41,11 @@ const Mlb = () => {
         <h1>Major League Baseball</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button>
-              <ul key={odds.id}>
-                <li>{odds.home_team} vs. {odds.away_team}</li>
+            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+              <ul >
+                <li>
+                  {odds.home_team} vs. {odds.away_team}
+                </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
