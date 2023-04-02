@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import MyContext from '../components/MyContext';
 
-const Nfl = () => {
+const Nfl = ({ onSetActiveItem }) => {
   const [sport, setSport] = useState("americanfootball_nfl");
   const { gameId, setGameId } = useContext(MyContext);
 
@@ -29,15 +29,21 @@ const Nfl = () => {
   }
 
 
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
 
   return (
     <>
       <div className="centered-text">
         <h1 className="sport-header">
           National Football League</h1>
-        <div>
+          <div>
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+            <button onClick={(e) => {
+              handleClick(odds.id);
+            }} key={odds.id}>
               <ul >
                 <li>
                   {odds.home_team} vs. {odds.away_team}
