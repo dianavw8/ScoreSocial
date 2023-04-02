@@ -36,12 +36,12 @@ const Nfl = ({ onSetActiveItem }) => {
 
   return (
     <>
-      <div className="centered-text">
-        <h1 className="sport-header">
-          National Football League</h1>
-          <div>
+      <div className="content-wrapper">
+        <h1 className="teal-text">National Football League</h1>
+          <div className="button-wrapper">
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => {
+            <button className="game-button" onClick={(e) => {
+              console.log("this is the odds id", odds.id);
               handleClick(odds.id);
             }} key={odds.id}>
               <ul >

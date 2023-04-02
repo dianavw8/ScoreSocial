@@ -20,9 +20,11 @@ export default function Navbar() {
   const { gameId, setGameId } = useContext(MyContext); // get the gameId and setGameId from the context
 
   const [activeItem, setActiveItem] = useState("Landingpage");
+  const [activeSport, setActiveSport] = useState("");
 
   const handleItemClick = (e, { name }) => {
     setActiveItem(name);
+    setActiveSport(name);
     setGameId(null); // set the gameId in the context to null
   };
 
@@ -53,7 +55,7 @@ export default function Navbar() {
       break;
     case "PlaceBet":
       if (gameId) {
-        content = <Bet gameId={gameId} />;
+        content = <Bet activeSport={activeSport} />;
       } else {
         content = <Nfl />; // render a default component if the gameId is null
       }
