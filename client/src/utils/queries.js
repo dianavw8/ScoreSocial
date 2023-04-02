@@ -7,14 +7,18 @@ export const GET_USER = gql`
       _id
       username
       email
+      points
     }
   }
 `;
 
-export const GET_USER_POINTS = gql`
-  query GetUserPoints($userId: ID!) {
-    user(id: $userId) {
-      currentPoints
+export const GET_CURRENT_USER = gql`
+  query me {
+    me{
+    id
+    email
+    username
+    points
     }
   }
 `;

@@ -35,12 +35,13 @@ export const LOGOUT_USER = gql`
   }
 `;
 
-export const REDUCE_POINTS = gql`
-  mutation ReducePoints ($_id: ID! $pointsUsed: Int!) {
-    reducePoints(id: $_id, pointsUsed: $pointsUsed) {
+export const UPDATE_POINTS = gql`
+  mutation UpdatePoints ($input: UpdatePointsInput) {
+    updateUser(input: $input) {
       user {
-        _id
-        currentPoints
+        id
+        username
+        points
       }
     }
   }
