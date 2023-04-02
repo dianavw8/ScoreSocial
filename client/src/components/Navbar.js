@@ -112,25 +112,22 @@ export default function Navbar() {
                 <Icon name="basketball ball" />
                 NBA
               </Menu.Item>
-              <Menu.Item
-                name="NHL"
-                as="h4"
-                inverted
-                color="teal"
-                active={activeItem === "NHL"}
-                onClick={handleItemClick}
-              >
-                <Icon name="hockey puck" />
-                NHL
+                <Menu.Item
+                  name="NHL"
+                  as="h4"
+                  inverted
+                  color="teal"
+                  active={activeItem === "NHL"}
+                  onClick={this.handleItemClick}
+                >
+                  <Icon name="hockey puck" />
+                  NHL
                 </Menu.Item>
-                </Menu>
-                </Grid.Column>
-                 {/* Just for show, need API info */}
-      <Grid.Column stretched width={13}>
-      <Segment>{content}</Segment>
-    </Grid.Column>
-  </Grid>
-</Container>
-</Container>
-);
+              </Menu>
+            </Grid.Column>
+          </Grid>
+        </Container>
+      </Container>
+    );
+  }
 }
