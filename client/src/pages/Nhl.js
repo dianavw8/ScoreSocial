@@ -1,12 +1,13 @@
 import React from "react";
 import dropdown from "react-dropdown";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
+import MyContext from '../components/MyContext';
 
 const Nhl = () => {
-
   const [sport, setSport] = useState("icehockey_nhl");
+  const { gameId, setGameId } = useContext(MyContext);
   console.log(sport);
 
   function formatDate(dateStr) {
@@ -27,15 +28,18 @@ const Nhl = () => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
 
+  console.log(gameId)
   return (
     <>
       <div className="centered-text">
         <h1>National Hockey League</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button>
-              <ul key={odds.id}>
-                <li>{odds.home_team} vs. {odds.away_team}</li>
+            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+              <ul >
+                <li>
+                  {odds.home_team} vs. {odds.away_team}
+                </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>

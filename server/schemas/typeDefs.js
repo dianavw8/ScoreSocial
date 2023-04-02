@@ -31,6 +31,24 @@ const typeDefs = gql`
     message: String
   }
 
+  type Outcomes {
+    label: String
+    price: Float
+    points: Int
+  }
+
+  type Markets {
+    key: String
+    outcomes: [Outcomes]
+  }
+
+  type Bookmakers {
+    key: String
+    title: String
+    last_update: String
+    markets: [Markets]
+  }
+
   type gameOdds {
     id: String
     sport_key: String
@@ -38,23 +56,34 @@ const typeDefs = gql`
     commence_time: String
     home_team: String
     away_team: String
+    bookmakers: [Bookmakers]
   }
 
-  type Score {
-  name: String
-  score: String
+  type singleGameOdds {
+    id: String
+    sport_key: String
+    sport_title: String
+    commence_time: String
+    home_team: String
+    away_team: String
+    bookmakers: [Bookmakers]
+  }
+
+  type Scores {
+    name: String
+    score: String
   }
 
   type gameScores {
-  id: String
-  sport_key: String
-  sport_title: String
-  commence_time: String
-  completed: Boolean
-  home_team: String
-  away_team: String
-  scores: [Score]
-  last_update: String
+    id: String
+    sport_key: String
+    sport_title: String
+    commence_time: String
+    completed: Boolean
+    home_team: String
+    away_team: String
+    scores: [Scores]
+    last_update: String
   }
 
   type Auth {
@@ -73,6 +102,7 @@ const typeDefs = gql`
     user(username: String!): User
     gameOdds(sport: String!): [gameOdds!]!
     gameScores(sport: String!): [gameScores!]!
+    singleGameOdds(sport: String!, eventId: String!): [singleGameOdds!]!
   }
 
   type Mutation {
@@ -81,6 +111,6 @@ const typeDefs = gql`
     logout: LogoutResponse
     updatePoints(input: UpdatePointsInput): User!
   }
-`;
+`
 
 module.exports = typeDefs;

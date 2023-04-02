@@ -1,10 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
+import MyContext from '../components/MyContext';
 
 const Epl = () => {
   const [sport, setSport] = useState("soccer_usa_mls");
+  const { gameId, setGameId } = useContext(MyContext);
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -31,9 +33,11 @@ const Epl = () => {
         <h1>English Premier League</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button>
-              <ul key={odds.id}>
-                <li>{odds.home_team} vs. {odds.away_team}</li>
+            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+              <ul >
+                <li>
+                  {odds.home_team} vs. {odds.away_team}
+                </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
@@ -45,7 +49,6 @@ const Epl = () => {
 };
 
 export default Epl;
-
 
 //   const gameOdds = data?.gameOdds;
 //   console.log(gameOdds)
