@@ -15,8 +15,11 @@ const UpdatePoints = (props) => {
     // const usernamestr = `${username}`
     // // const userId = User.findById(id)
     // // console.log(userId)
+    // const { loading, data } = useQuery(GET_USER, {
+    //   variables: { username: 'Logan2' },
+    // });
     const { loading, data } = useQuery(GET_USER, {
-      variables: { username: 'Logan2' },
+      variables: { username: Auth.getProfile().data.username },
     });
     console.log(data?.user)
     const username = props.username
