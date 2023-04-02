@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import {
@@ -12,7 +12,12 @@ import {
 } from "semantic-ui-react";
 
 const Nfl = () => {
+import MyContext from '../components/MyContext';
+
+const Nfl = ({ onSetActiveItem }) => {
   const [sport, setSport] = useState("americanfootball_nfl");
+  const { gameId, setGameId } = useContext(MyContext);
+
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -32,6 +37,12 @@ const Nfl = () => {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
+
+
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
 
   return (
     // <>
