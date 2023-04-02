@@ -12,10 +12,11 @@ import Nba from "../pages/Nba";
 import Nfl from "../pages/Nfl";
 import Nhl from "../pages/Nhl";
 import Epl from "../pages/Epl";
+import LandingPage from "../pages/Landingpage";
 
 
 export default class Navbar extends Component {
-  state = { activeItem: "NFL" };
+  state = { activeItem: "Landingpage" };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -24,6 +25,9 @@ export default class Navbar extends Component {
 
     let content;
     switch (activeItem) {
+      case "Landingpage":
+        content = <LandingPage />;
+        break;
       case "NFL":
         content = <Nfl/>;
         break;

@@ -13,6 +13,10 @@ import Username from "./pages/Username";
 import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
 import MyContext from "./components/MyContext";
+import UpdatePoints from "./components/PointsForm";
+
+import LandingPage from "./pages/Landingpage";
+
 
 import {
   ApolloClient,
@@ -57,6 +61,8 @@ function App() {
             <Route path="/login" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
             <Route path="/profile" component={Profile} />
+            <Route path="/pointsform" component={UpdatePoints} />
+            <Route path="/landingpage" component={LandingPage} />
           </Switch>
         </BrowserRouter>
       </MyContext.Provider>

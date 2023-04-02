@@ -20,6 +20,10 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    points: {
+      type: Number,
+      required: true,
     }
   },
   // set this to use virtual below
