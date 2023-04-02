@@ -101,3 +101,23 @@ export const GET_USER_PROFILE = gql`
     }
   }
 `;
+
+export const GET_FRIEND = gql`
+query GetFriend {
+  user {
+    id
+    username
+    friends {
+      id
+      username
+    }
+  }
+}`;
+
+const subscription = gql`
+  subscription UserOnlineStatus($userId: ID!) {
+  userOnlineStatus(userId: $userId) {
+    online
+  }
+}
+`;

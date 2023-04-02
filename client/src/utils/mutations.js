@@ -46,3 +46,16 @@ export const UPDATE_POINTS = gql`
     }
   }
 `;
+
+export const SEND_FRIEND_REQUEST = gql`
+mutation addFriend($username: String!, $id: ID!) {
+  addFriend(username: $username, email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
+      email
+    }
+  }
+}
+`;
