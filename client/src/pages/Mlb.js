@@ -19,13 +19,13 @@ const Mlb = () => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
   
-  // if(gameOdds === []) {
-  //   return (
-  //       <>
-  //       <h1>There are no upcoming games.</h1>
-  //       </>
-  //   )
-  //  }
+  if(gameOdds === []) {
+    return (
+        <>
+        <h1>There are no upcoming games.</h1>
+        </>
+    )
+   }
 
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
@@ -43,7 +43,7 @@ const Mlb = () => {
             <button>
               <ul key={odds.id}>
                 <li>{odds.home_team} vs. {odds.away_team}</li>
-                <li>Start Time: {odds.commence_time}</li>
+                <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
           ))}

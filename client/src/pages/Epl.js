@@ -18,6 +18,13 @@ const Epl = () => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
 
+  function formatDate(dateStr) {
+    const dateObj = new Date(dateStr);
+    const formattedDate = dateObj.toLocaleDateString("en-US");
+    const formattedTime = dateObj.toLocaleTimeString("en-US");
+    return `${formattedDate} ${formattedTime}`;
+  }
+
   return (
     <>
       <div className="centered-text">
@@ -26,10 +33,8 @@ const Epl = () => {
           {gameOdds?.map((odds) => (
             <button>
               <ul key={odds.id}>
-                <li>
-                  {odds.home_team} vs. {odds.away_team}
-                </li>
-                <li>Start Time: {odds.commence_time}</li>
+                <li>{odds.home_team} vs. {odds.away_team}</li>
+                <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
           ))}
@@ -40,3 +45,27 @@ const Epl = () => {
 };
 
 export default Epl;
+
+
+//   const gameOdds = data?.gameOdds;
+//   console.log(gameOdds)
+
+//   const handleItemClick = (item) => {
+//     selectedItem(item);
+//   }
+
+//   return (
+//     <>
+//       <div className="centered-text">
+//         <h1>English Premier League</h1>
+//         <ul key={odds.id}>
+//           {sport.map((item) => (
+//             <li onClick={() => handleItemClick(item)}>
+//               {item.name}
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </>
+//   )
+// }

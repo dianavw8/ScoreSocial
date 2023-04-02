@@ -77,7 +77,7 @@ const LoginForm = () => {
           </Segment>
         </Form>
         <Message>
-          New to ScoreSocial? <a href='/signup'>Sign Up</a>
+          New to us? <a href='/signup'>Sign Up</a>
         </Message>
       </Grid.Column>
     </Grid>

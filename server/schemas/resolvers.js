@@ -71,6 +71,17 @@ const resolvers = {
       // Return a success message
       return { message: "Logged out successfully" };
     },
+    reducePoints: async (parent, { _id, pointsUsed }, context) => {
+      const user = await User.findById(_id);
+      if (!user) {
+        throw new Error('User not found');
+      }
+    
+      User.currentPoints = User.currentpoints - pointsUsed;
+      await User.save();
+    
+      return User;
+    },
   },
 };
 

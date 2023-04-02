@@ -14,6 +14,7 @@ import Nhl from "../pages/Nhl";
 import Epl from "../pages/Epl";
 import LandingPage from "../pages/Landingpage";
 
+
 export default class Navbar extends Component {
   state = { activeItem: "Landingpage" };
 
@@ -45,6 +46,7 @@ export default class Navbar extends Component {
       default:
         content = <Nfl />;
     }
+    
 
     return (
       <Container>
