@@ -62,7 +62,7 @@ const typeDefs = gql`
     user: User
   }
 
-  input pointInput {
+  input currentPointsInput {
     pointNumber: Int
   }
 
@@ -78,6 +78,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     logout: LogoutResponse
+    reducePoints(currentPoints: currentPointsInput): User
   }
 `;
 
