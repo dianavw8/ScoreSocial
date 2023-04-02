@@ -1,5 +1,12 @@
-import React from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import {
+  Container,
+  Grid,
+  Icon,
+  Menu,
+  Segment,
+} from "semantic-ui-react";
+import MyContext from '../components/MyContext';
 
 const BETTING_URL = '';
 
@@ -7,6 +14,7 @@ export default function BettingGame() {
   const [balance, setBalance] = useState(100);
   const [betAmount, setBetAmount] = useState(0);
   const [betResult, setBetResult] = useState(null);
+  const { gameId, setGameId } = useContext(MyContext);
 
   async function placeBet() {
     try {
@@ -39,7 +47,13 @@ export default function BettingGame() {
 
   return (
     <div>
-      
+       <>
+          <div className="centered-text">
+            <Container>
+              <h1>Bets GameId is: {gameId}</h1>
+            </Container>
+          </div>
+        </>
     </div>
   );
 }

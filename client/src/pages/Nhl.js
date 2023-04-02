@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import MyContext from '../components/MyContext';
 
-const Nhl = () => {
+const Nhl = ({ onSetActiveItem }) => {
   const [sport, setSport] = useState("icehockey_nhl");
   const { gameId, setGameId } = useContext(MyContext);
   console.log(sport);
@@ -16,6 +16,11 @@ const Nhl = () => {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
+
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
 
   const { loading, data } = useQuery(GET_ODDS, {
     // need to set the sport_key: whatever staate variable we createed to hold the sport_key of what sport we are looking for the games for
@@ -35,7 +40,9 @@ const Nhl = () => {
         <h1>National Hockey League</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+            <button onClick={(e) => {
+              handleClick(odds.id);
+            }} key={odds.id}>
               <ul >
                 <li>
                   {odds.home_team} vs. {odds.away_team}

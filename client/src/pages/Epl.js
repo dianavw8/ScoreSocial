@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import MyContext from '../components/MyContext';
 
-const Epl = () => {
+const Epl = ({ onSetActiveItem }) => {
   const [sport, setSport] = useState("soccer_usa_mls");
   const { gameId, setGameId } = useContext(MyContext);
   console.log(sport);
@@ -18,6 +18,14 @@ const Epl = () => {
   }
 
   const gameOdds = data?.gameOdds;
+  
+  if (gameOdds === []) {
+    return (
+      <>
+        <h1>There are no upcoming games.</h1>
+      </>
+    );
+  }
   console.log(gameOdds);
 
   function formatDate(dateStr) {
@@ -26,6 +34,11 @@ const Epl = () => {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
+  
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
 
   return (
     <>
@@ -33,7 +46,9 @@ const Epl = () => {
         <h1>English Premier League</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+            <button onClick={(e) => {
+              handleClick(odds.id);
+            }} key={odds.id}>
               <ul >
                 <li>
                   {odds.home_team} vs. {odds.away_team}

@@ -1,16 +1,14 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { GET_ODDS, GET_SCORES } from "../utils/queries";
+import React, { useContext } from "react";
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_ODDS } from "../utils/queries";
 import MyContext from '../components/MyContext';
 
-const Mlb = () => {
+const Mlb = ({ onSetActiveItem }) => {
   const [sport, setSport] = useState("baseball_mlb");
   const { gameId, setGameId } = useContext(MyContext);
-  console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
-    // need to set the sport_key: whatever staate variable we createed to hold the sport_key of what sport we are looking for the games for
     variables: { sport },
   });
   if (loading) {
@@ -18,7 +16,6 @@ const Mlb = () => {
   }
 
   const gameOdds = data?.gameOdds;
-  console.log(gameOdds);
 
   if (gameOdds === []) {
     return (
@@ -35,13 +32,21 @@ const Mlb = () => {
     return `${formattedDate} ${formattedTime}`;
   }
 
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
+
   return (
     <>
       <div className="centered-text">
         <h1>Major League Baseball</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
+            <button onClick={(e) => {
+              console.log("this is the odds id", odds.id);
+              handleClick(odds.id);
+            }} key={odds.id}>
               <ul >
                 <li>
                   {odds.home_team} vs. {odds.away_team}
