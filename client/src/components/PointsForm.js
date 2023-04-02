@@ -10,20 +10,12 @@ import { GET_USER } from '../utils/queries';
 const UpdatePoints = (props) => {
     const [addPoints, setAddPoints] = useState(0)
     const [usePoints, setUsePoints] = useState(0)
-    // const profileData = Auth.getProfile();
-    // const {username, id, points} = profileData.data
-    // const usernamestr = `${username}`
-    // // const userId = User.findById(id)
-    // // console.log(userId)
     const { loading, data } = useQuery(GET_USER, {
-      variables: { username: 'Logan2' },
+      variables: { username: Auth.getProfile().data.username },
     });
-    console.log(data?.user)
-    const username = props.username
-    const points = props.points
-    // const { me } = data
-    // const { id, username, email, points} = me;
-    // console.log(username)
+    const username = data?.user.username
+    const points = data?.user.points
+
     const [updatePoints, { loading: updateLoading, error: updateError }] = useMutation(UPDATE_POINTS);
 
      const handlePointsClick = (points) => {
@@ -35,19 +27,13 @@ const UpdatePoints = (props) => {
   };
     const handleUsePointsSubmit = async (event) => {
         event.preventDefault();
-        const input = {
-          points: -usePoints
-        };
-        updatePoints({variables: { input }})
+        updatePoints({variables: { username, points: -usePoints }})
         .then(result => {
           console.log(result.data.updateUser.user.points);
           setUsePoints(0);
         });
     };
     
-// console.log(points)
-    // const user = data;
-// console.log(data)
     return (
     <div>
       <h2>Points: {points}</h2>
