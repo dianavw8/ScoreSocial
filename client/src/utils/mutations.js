@@ -37,7 +37,7 @@ export const LOGOUT_USER = gql`
 
 export const REDUCE_POINTS = gql`
   mutation ReducePoints ($_id: ID! $pointsUsed: Int!) {
-    updatePoints(id: $_id, pointsUsed: $pointsUsed) {
+    reducePoints(id: $_id, pointsUsed: $pointsUsed) {
       user {
         _id
         currentPoints
