@@ -41,21 +41,29 @@ const Mlb = ({ onSetActiveItem }) => {
     <>
       <div className="content-wrapper">
         <h1 className="teal-text">Major League Baseball</h1>
-        <div className="button-wrapper">
-          {gameOdds?.map((odds) => (
-            <button className="game-button" onClick={(e) => {
-              console.log("this is the odds id", odds.id);
-              handleClick(odds.id);
-            }} key={odds.id}>
-              <ul >
-                <li>
-                  {odds.home_team} vs. {odds.away_team}
-                </li>
-                <li>Start Time: {formatDate(odds.commence_time)}</li>
-              </ul>
-            </button>
-          ))}
-        </div>
+        {gameOdds?.length > 0 ? (
+          <div className="button-wrapper">
+            {gameOdds.map((odds) => (
+              <button
+                className="game-button"
+                onClick={(e) => {
+                  console.log("this is the odds id", odds.id);
+                  handleClick(odds.id);
+                }}
+                key={odds.id}
+              >
+                <ul>
+                  <li>
+                    {odds.home_team} vs. {odds.away_team}
+                  </li>
+                  <li>Start Time: {formatDate(odds.commence_time)}</li>
+                </ul>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p>There are no games available right now. Please check back later.</p>
+        )}
       </div>
     </>
   );
