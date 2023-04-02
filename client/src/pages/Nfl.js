@@ -2,16 +2,6 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import {
-  Button,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Segment,
-} from "semantic-ui-react";
-
-const Nfl = () => {
 import MyContext from '../components/MyContext';
 
 const Nfl = ({ onSetActiveItem }) => {
@@ -45,53 +35,26 @@ const Nfl = ({ onSetActiveItem }) => {
   };
 
   return (
-    // <>
-    //   <div className="centered-text">
-    //     <h1>National Football League</h1>
-    //     <div>
-    //       {gameOdds?.map((odds) => (
-    //         <button>
-    //           <ul key={odds.id}>
-    //             <li>{odds.home_team} vs. {odds.away_team}</li>
-    //             <li>Start Time: {formatDate(odds.commence_time)}</li>
-    //           </ul>
-    //         </button>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </>
-    <Grid divided="vertically">
-      <Grid.Row>
-        <Grid.Column>
-          <Header as="h2" attached="top" block>
-            Team A vs. Team B
-          </Header>
-          <Segment attached>
-            <Segment.Group horizontal>
-              <Segment>Team A</Segment>
-              <Segment>Odds: </Segment>
-              <Button animated size="large" basic color="teal" floated="right">
-                <Button.Content visible>Place Bet</Button.Content>
-                <Button.Content hidden>
-                  <Icon name="arrow right" />
-                </Button.Content>
-              </Button>
-            </Segment.Group>
-            <Divider section style={{ margin: "-0.2em" }} />
-            <Segment.Group horizontal>
-              <Segment>Team B</Segment>
-              <Segment>Odds: </Segment>
-              <Button animated size="large" basic color="teal" floated="right">
-                <Button.Content visible>Place Bet</Button.Content>
-                <Button.Content hidden>
-                  <Icon name="arrow right" />
-                </Button.Content>
-              </Button>
-            </Segment.Group>
-          </Segment>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+    <>
+      <div className="content-wrapper">
+        <h1 className="teal-text">National Football League</h1>
+          <div className="button-wrapper">
+          {gameOdds?.map((odds) => (
+            <button className="game-button" onClick={(e) => {
+              console.log("this is the odds id", odds.id);
+              handleClick(odds.id);
+            }} key={odds.id}>
+              <ul >
+                <li>
+                  {odds.home_team} vs. {odds.away_team}
+                </li>
+                <li>Start Time: {formatDate(odds.commence_time)}</li>
+              </ul>
+            </button>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
