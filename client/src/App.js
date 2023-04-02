@@ -4,7 +4,6 @@ import { Route, HashRouter, BrowserRouter, Redirect, Switch } from "react-router
 import SSHeader from "./components/Header";
 import Profile from "./pages/Profile";
 import Username from "./pages/Username";
-import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
 import UpdatePoints from "./components/PointsForm";
 
@@ -47,7 +46,6 @@ function App() {
           <SSHeader />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route path="/points" component={Points} />
             <Route path="/username" component={Username} />
             <Route path="/login" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
