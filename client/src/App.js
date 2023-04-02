@@ -8,6 +8,9 @@ import Points from "./pages/Points";
 import SignupForm from "./components/SignupForm";
 import UpdatePoints from "./components/PointsForm";
 
+import LandingPage from "./pages/Landingpage";
+
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -50,6 +53,7 @@ function App() {
             <Route path="/signup" component={SignupForm} />
             <Route path="/profile" component={Profile} />
             <Route path="/pointsform" component={UpdatePoints} />
+            <Route path="/landingpage" component={LandingPage} />
           </Switch>
       </BrowserRouter>
     </ApolloProvider>

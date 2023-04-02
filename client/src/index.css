@@ -39,3 +39,32 @@ h6 {
   color: red;
   font-size: large;
 }
+
+.landing {
+  background-image: 
+  url(
+"https://user-images.githubusercontent.com/114713151/229315857-d58df1a2-af58-4f0d-81df-2e3e57440834.jpg");
+  background-size: 100%;
+  opacity: 90%;
+  width: 100%;
+  height: 550px;
+  margin-top: 7px;
+  font-size: 20px;
+  background-repeat:no-repeat; 
+  text-align: center;
+padding-top: 180px;
+
+}
+
+.landing p{
+  color: white;
+  text-align:justify style;
+  background-color: rgb(27, 27, 27);
+ opacity: 0.9;
+border-radius:4px;
+padding:15px;
+margin:5px;
+}
+
+
+
