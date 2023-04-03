@@ -4,7 +4,9 @@ import { Container } from 'semantic-ui-react';
 import { GET_USER_BETS } from '../utils/queries';
 
 const Username = () => {
-  const { loading, error, data } = useQuery(GET_USER_BETS);
+  const { loading, error, data } = useQuery(GET_USER_BETS, {
+    fetchPolicy: 'network-only',
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
