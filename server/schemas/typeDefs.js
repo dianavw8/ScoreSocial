@@ -62,11 +62,6 @@ const typeDefs = gql`
     user: User
   }
 
-  input UpdatePointsInput {
-    username: String!
-    points: Int!
-  }
-
   type Query {
     me: User
     users: [User]
@@ -79,7 +74,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!, points: Int = 1000): Auth
     login(email: String!, password: String!): Auth
     logout: LogoutResponse
-    updatePoints(input: UpdatePointsInput!): User!
+    updatePoints(username: String!, points: Int!): User!
   }
 `;
 

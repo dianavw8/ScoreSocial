@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -8,6 +9,7 @@ import {
   Menu,
 } from "semantic-ui-react";
 import Auth from "../utils/auth";
+import { GET_USER } from "../utils/queries";
 const SSHeader = ({ pointsEarned, loginForm, onLogout }) => {
   const [userProfile, setUserProfile] = useState({});
   // If the user is logged in, set the `userProfile` state to the logged-in user's information
@@ -18,7 +20,13 @@ const SSHeader = ({ pointsEarned, loginForm, onLogout }) => {
       setUserProfile(profileData);
       console.log(profileData);
     }
-  }, []);
+  }, [])
+
+  const { data } = useQuery(GET_USER, {
+    variables: { username: userProfile?.data?.username },
+  });
+  const points = data?.user?.points;
+
   return (
     <Menu fixed="top" inverted compact icon="labeled">
       <Container>
@@ -34,7 +42,7 @@ const SSHeader = ({ pointsEarned, loginForm, onLogout }) => {
         </Menu.Item>
         <Menu.Item name="points" as={Link} to="/points" position="right">
           <Icon name="gem" />
-          50 Points Left
+          {points} Points Left
         </Menu.Item>
         {userProfile && userProfile.data && Auth.loggedIn() ? (
           <Menu.Item name="username" as={Link} to="/username">
