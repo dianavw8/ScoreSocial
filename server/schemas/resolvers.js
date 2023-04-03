@@ -44,8 +44,18 @@ const resolvers = {
       const { data } = await axios(
         `https://api.the-odds-api.com/v4/sports/${sport}/events/${eventId}/odds?apiKey=${process.env.API_KEY}&regions=us&markets=h2h&dateFormat=iso&oddsFormat=decimal`
       );
+      let team_A;
+      let team_B;
 
-      return [data];
+      if (data.home_team.charAt(0) < data.away_team.charAt(0)) {
+        team_A = data.home_team;
+        team_B = data.away_team
+      } else {
+        team_A = data.away_team
+        team_B = data.home_team
+      }
+
+      return {...data, team_A, team_B};
     },
   },
   Mutation: {

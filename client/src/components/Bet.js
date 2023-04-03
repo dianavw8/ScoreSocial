@@ -6,7 +6,7 @@ import {
   Menu,
   Segment,
 } from "semantic-ui-react";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_POINTS } from '../utils/mutations';
 import { GET_USER,GET_SINGLE_ODDS } from '../utils/queries';

@@ -1,13 +1,14 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Nfl = ({ onSetActiveItem }) => {
-  const [sport, setSport] = useState("americanfootball_nfl");
   const { gameId, setGameId } = useContext(MyContext);
-
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("americanfootball_nfl");
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -28,29 +29,22 @@ const Nfl = ({ onSetActiveItem }) => {
     return `${formattedDate} ${formattedTime}`;
   }
 
-
-  const handleClick = (oddsId) => {
-    setGameId(oddsId);
-    onSetActiveItem("PlaceBet");
-  };
-
   return (
     <>
-      <div className="content-wrapper">
-        <h1 className="teal-text">National Football League</h1>
-          <div className="button-wrapper">
+      <div className="centered-text">
+        <h1 className="sport-header">National Football League</h1>
+        <div>
           {gameOdds?.map((odds) => (
-            <button className="game-button" onClick={(e) => {
-              console.log("this is the odds id", odds.id);
-              handleClick(odds.id);
-            }} key={odds.id}>
-              <ul >
+            <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
+            <button onClick={(e) => setGameId(odds.id)}>
+              <ul>
                 <li>
                   {odds.home_team} vs. {odds.away_team}
                 </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
+          </Link>
           ))}
         </div>
       </div>

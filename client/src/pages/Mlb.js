@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_ODDS } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import React, { useState, useContext } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ODDS, GET_SCORES } from "../utils/queries";
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Mlb = ({ onSetActiveItem }) => {
-  const [sport, setSport] = useState("baseball_mlb");
   const { gameId, setGameId } = useContext(MyContext);
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("baseball_mlb");
+  console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
     variables: { sport },
@@ -16,14 +19,6 @@ const Mlb = ({ onSetActiveItem }) => {
   }
 
   const gameOdds = data?.gameOdds;
-
-  if (gameOdds === []) {
-    return (
-      <>
-        <h1>There are no upcoming games.</h1>
-      </>
-    );
-  }
 
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
@@ -43,17 +38,16 @@ const Mlb = ({ onSetActiveItem }) => {
         <h1 className="teal-text">Major League Baseball</h1>
         <div className="button-wrapper">
           {gameOdds?.map((odds) => (
-            <button className="game-button" onClick={(e) => {
-              console.log("this is the odds id", odds.id);
-              handleClick(odds.id);
-            }} key={odds.id}>
-              <ul >
-                <li>
-                  {odds.home_team} vs. {odds.away_team}
-                </li>
-                <li>Start Time: {formatDate(odds.commence_time)}</li>
-              </ul>
-            </button>
+            <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
+              <button onClick={(e) => setGameId(odds.id)}>
+                <ul>
+                  <li>
+                    {odds.home_team} vs. {odds.away_team}
+                  </li>
+                  <li>Start Time: {formatDate(odds.commence_time)}</li>
+                </ul>
+              </button>
+            </Link>
           ))}
         </div>
       </div>

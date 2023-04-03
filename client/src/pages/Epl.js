@@ -1,12 +1,14 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Epl = ({ onSetActiveItem }) => {
-  const [sport, setSport] = useState("soccer_usa_mls");
   const { gameId, setGameId } = useContext(MyContext);
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("soccer_usa_mls");
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -46,17 +48,16 @@ const Epl = ({ onSetActiveItem }) => {
         <h1 className="teal-text">English Premier League</h1>
         <div className="button-wrapper">
           {gameOdds?.map((odds) => (
-            <button className="game-button" onClick={(e) => {
-              console.log("this is the odds id", odds.id);
-              handleClick(odds.id);
-            }} key={odds.id}>
-              <ul >
+            <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
+            <button onClick={(e) => setGameId(odds.id)}>
+              <ul>
                 <li>
                   {odds.home_team} vs. {odds.away_team}
                 </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
+          </Link>
           ))}
         </div>
       </div>
@@ -66,25 +67,3 @@ const Epl = ({ onSetActiveItem }) => {
 
 export default Epl;
 
-//   const gameOdds = data?.gameOdds;
-//   console.log(gameOdds)
-
-//   const handleItemClick = (item) => {
-//     selectedItem(item);
-//   }
-
-//   return (
-//     <>
-//       <div className="centered-text">
-//         <h1>English Premier League</h1>
-//         <ul key={odds.id}>
-//           {sport.map((item) => (
-//             <li onClick={() => handleItemClick(item)}>
-//               {item.name}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </>
-//   )
-// }

@@ -14,7 +14,7 @@ import Nhl from "../pages/Nhl";
 import Epl from "../pages/Epl";
 import LandingPage from "../pages/Landingpage";
 import Bet from "../components/Bet";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "./MyContext";
 
 export default function Navbar() {
   const { gameId, setGameId } = useContext(MyContext); // get the gameId and setGameId from the context
