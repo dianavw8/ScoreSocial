@@ -2,7 +2,7 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { secret, expiration } = require("./config"); // import your config file with secret and expiration values
 require("dotenv").config();
-
+const { Bet } = require("../models");
 const { User } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { db } = require("../models/User");
@@ -44,18 +44,17 @@ const resolvers = {
       const { data } = await axios(
         `https://api.the-odds-api.com/v4/sports/${sport}/events/${eventId}/odds?apiKey=${process.env.API_KEY}&regions=us&markets=h2h&dateFormat=iso&oddsFormat=decimal`
       );
-      let team_A;
-      let team_B;
-
-      if (data.home_team.charAt(0) < data.away_team.charAt(0)) {
-        team_A = data.home_team;
-        team_B = data.away_team
-      } else {
-        team_A = data.away_team
-        team_B = data.home_team
+      
+      return [data];
+    },
+    userBets: async (_, __, { user }) => {
+      if (!user) {
+        throw new Error('Not authenticated');
       }
 
-      return {...data, team_A, team_B};
+      const bets = await Bet.find({ userId: user._id });
+
+      return bets;
     },
   },
   Mutation: {
@@ -104,6 +103,27 @@ const resolvers = {
       } catch (error) {
         console.error(error);
       }
+    },
+    addBet: async (_, { chosenTeam, betAmount, singleGameOdds }, context) => {
+      // Check if user is authenticated
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a bet.");
+      }
+    
+      // Create new bet
+      const bet = new Bet({
+        chosenTeam,
+        betAmount,
+        singleGameOdds,
+        createdAt: new Date().toISOString(),
+        userId: context.user._id,
+      });
+    
+      // Save bet to database
+      await bet.save();
+    
+      // Return newly created bet
+      return bet;
     },
   },
 };

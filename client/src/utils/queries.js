@@ -68,14 +68,14 @@ export const GET_SCORES = gql`
 `;
 
 export const GET_SINGLE_ODDS = gql`
-  query Query($sport: String!, $eventId: String!) {
-    singleGameOdds(sport: $sport, eventId: $eventId) {
+query singleGameOdds($sport: String!, $eventId: String!) {
+  singleGameOdds(sport: $sport, eventId: $eventId) {
       id
       sport_key
       sport_title
       commence_time
-      team_A
-      team_B
+      home_team
+      away_team
       bookmakers {
         key
         title
@@ -113,6 +113,20 @@ query GetFriend {
     }
   }
 }`;
+
+export const GET_USER_BETS = gql`
+query userBets {
+  userBets{
+    _id
+    chosenTeam
+    betAmount
+    singleGameOdds 
+    createdAt
+    userId
+  }
+}`;
+
+
 
 const subscription = gql`
   subscription UserOnlineStatus($userId: ID!) {

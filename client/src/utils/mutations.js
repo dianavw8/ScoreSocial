@@ -56,3 +56,15 @@ mutation addFriend($username: String!, $id: ID!) {
   }
 }
 `;
+
+export const ADD_BET = gql`
+  mutation AddBet($chosenTeam: String!, $betAmount: Int!, $singleGameOdds: String!) {
+    addBet(chosenTeam: $chosenTeam, betAmount: $betAmount, singleGameOdds: $singleGameOdds) {
+      _id
+      chosenTeam
+      betAmount
+      userId
+      singleGameOdds 
+    }
+  }
+`;
