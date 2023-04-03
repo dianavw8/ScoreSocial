@@ -17,14 +17,6 @@ const Mlb = ({ onSetActiveItem }) => {
 
   const gameOdds = data?.gameOdds;
 
-  if (gameOdds === []) {
-    return (
-      <>
-        <h1>There are no upcoming games.</h1>
-      </>
-    );
-  }
-
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
     const formattedDate = dateObj.toLocaleDateString("en-US");

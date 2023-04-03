@@ -39,6 +39,13 @@ export default function BettingGame({activeSport}) {
   console.log(data?.singleGameOdds[0]);
   BetData = data?.singleGameOdds[0];
 
+  if (loading == false && BetData == null) {
+    return <h1>Bets on this game can no longer be made.</h1>;
+  }
+  if (loading == true) {
+    return <h1>Loading...</h1>;
+  }
+
   function activeSportApiReference(activeSportName) {
     let content;
     switch (activeSportName) {
@@ -106,7 +113,7 @@ export default function BettingGame({activeSport}) {
           <div className="centered-text">
             <Container>
               <h1 class="teal-text"> {BetData?.sport_title} : Place a Bet!</h1>
-              <h3>{BetData?.away_team} vs {BetData?.home_team}</h3>
+              <h3>{BetData?.away_team} at {BetData?.home_team}</h3>
               <h3>{formatDate(BetData?.commence_time)}</h3>
             </Container>
           </div>
