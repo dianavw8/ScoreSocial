@@ -7,6 +7,11 @@ export const GET_USER = gql`
       username
       email
       points
+      bets{
+        chosenTeam
+        betAmount
+        singleGameOdds
+      }
     }
   }
 `;
@@ -18,6 +23,11 @@ export const GET_CURRENT_USER = gql`
       email
       username
       points
+      bets{
+        chosenTeam
+        betAmount
+        singleGameOdds
+      }
     }
   }
 `;

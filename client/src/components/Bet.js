@@ -20,9 +20,11 @@ export default function BettingGame({ activeSport }) {
   let activeSportApiRef = activeSportApiReference(activeSport);
   const [betAmount, setBetAmount] = useState(0);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  // need to add a singleGameOdds state variiable
   const [betResult, setBetResult] = useState(null);
   const { gameId, setGameId } = useContext(MyContext);
   const [showImage, setShowImage] = useState("");
+  //bet mutation import
   const [addBet, { error }] = useMutation(ADD_BET);
   const [betPlaced, setBetPlaced] = useState(false);
   const [updatePoints] = useMutation(UPDATE_POINTS);
@@ -96,7 +98,7 @@ export default function BettingGame({ activeSport }) {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
-
+// handlePLaceBet needs to be updated to get values of chosenTeam and singleGameOdds from form
   function handlePlaceBet() {
     // console.log("PLACING BET");
     // console.log("selectedTeam:", selectedTeam);
@@ -125,6 +127,9 @@ export default function BettingGame({ activeSport }) {
           //setBetResult(res.data.addBet);
           setBetPlaced(true); // set state variable to true
           console.log("BET SUCCESSFUL");
+
+          //example of mutation insert
+          //const {data} = await addBet({variables: {chosenTeam: selectedTeam, betAmount: betAmount,  singleGameOdds: valueFromForm}})
         })
         .catch((err) => {
           console.log(err);
@@ -132,7 +137,7 @@ export default function BettingGame({ activeSport }) {
     }
   }
   
-
+// need to wrap 
   return (
     <div>
       <>
@@ -141,6 +146,8 @@ export default function BettingGame({ activeSport }) {
 
         <div className="centered-text">
           <Container>
+          {/* start form here */}
+          {/* <Form onSubmit={setBetAmount} */}
             <Grid divided="vertically">
               <Grid.Row>
                 <Grid.Column>
@@ -148,6 +155,7 @@ export default function BettingGame({ activeSport }) {
                     <h2>{BetData?.away_team} at {BetData?.home_team}</h2>
                     <h3>{formatDate(BetData?.commence_time)}</h3>
                   </Header>
+     {/* need to grab values for chosenTeam and singleGameOdds */}
                   <Segment attached>
                     <Segment.Group horizontal>
                     <Segment
@@ -178,6 +186,8 @@ export default function BettingGame({ activeSport }) {
                         basic
                         color="teal"
                         floated="right"
+                        // needs a submit type instead of onclick
+                        //type="submit"
                         onClick={handlePlaceBet}
                       >
                         <Button.Content visible>Place Bet</Button.Content>
@@ -190,6 +200,7 @@ export default function BettingGame({ activeSport }) {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
+            {/* </Form> */}
           </Container>
         </div>
       </>
