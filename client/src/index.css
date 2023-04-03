@@ -34,12 +34,48 @@ h6 {
   min-height: 300px;
   text-align: -webkit-center;
 }
+.slide-in-memo {
+  position: absolute;
+  right: -195%;
+  top: 44%;
+  transition: transform 1s ease-in-out;
+}
+
+.show-memo {
+  transform: translateX(-490%);
+  width: 50%;
+}
 
 .red-text{
   color: red;
   font-size: large;
 }
+.teal-text{
+  color: teal;
+}
 
+.game-button{
+  display: block;
+  width: -webkit-fill-available;
+}
+
+.game-button:nth-child(even){
+  background-color: rgb(120, 197, 197);
+}
+
+.game-button li{
+  list-style-type: none;
+}
+
+.content-wrapper{
+  text-align: -webkit-center;
+}
+.button-wrapper{
+  text-align: -webkit-center;
+  height: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
 .landing {
   background-image: 
   url(

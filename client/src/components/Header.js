@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import {
+  Button,
   Container,
+  Grid,
   Header,
   Icon,
   Image,
   Menu,
+  Popup,
 } from "semantic-ui-react";
 import Auth from "../utils/auth";
 import { GET_USER } from "../utils/queries";
-const SSHeader = ({ pointsEarned, loginForm, onLogout }) => {
+
+const SSHeader = ({ pointsEarned, loginForm, onLogout}) => {
   const [userProfile, setUserProfile] = useState({});
   // If the user is logged in, set the `userProfile` state to the logged-in user's information
   useEffect(() => {
@@ -40,11 +44,46 @@ const SSHeader = ({ pointsEarned, loginForm, onLogout }) => {
             ScoreSocial
           </Header>
         </Menu.Item>
-        <Menu.Item name="points" as={Link} to="/points" position="right">
-          <Icon name="gem" />
-          {points} Points Left
-        </Menu.Item>
-        {userProfile && userProfile.data && Auth.loggedIn() ? (
+
+        {/* Points */}
+        <Popup
+          trigger={
+            <Menu.Item name="points" position="right">
+              <Icon name="gem" />
+              {points} Points Left
+            </Menu.Item>
+          }
+          flowing
+          hoverable
+        >
+          <Grid centered divided columns={3}>
+            <Grid.Column textAlign="center">
+              <Header as="h4"> Add Points</Header>
+              <Button>
+                <Icon name="plus square" />
+                10
+              </Button>
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <Header as="h4"> Add Points</Header>
+              <Button>
+                <Icon name="plus square" />
+                25
+              </Button>
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <Header as="h4"> Add Points</Header>
+              <Button>
+                <Icon name="plus square" />
+                50
+              </Button>
+            </Grid.Column>
+          </Grid>
+        </Popup>
+        {/* Points */}
+
+       
+       {userProfile && userProfile.data && Auth.loggedIn() ? (
           <Menu.Item name="username" as={Link} to="/username">
             <Icon name="user circle" />
             {userProfile.data.username}
