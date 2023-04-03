@@ -31,10 +31,10 @@ const Username = () => {
   return (
     <>
       <div className="centered-text">
-        <Container className='teal-text'>
+        <Container className='teal-text bet-wrapper'>
           <h1>My Bets</h1>
           {parsedUserBets?.length > 0 ? (
-          <div className="bet-wrapper">
+          <div>
             {parsedUserBets.map((bet) => (
               <button
                 className="game-button"

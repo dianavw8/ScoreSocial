@@ -47,11 +47,12 @@ h6 {
   width: 30%;
 }
 .bet-wrapper{
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .selected-team{
   background-color: rgb(120, 197, 197) !important;
 }
+
 .center-text-simple{
   text-align: -webkit-center;
 }
