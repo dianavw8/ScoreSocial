@@ -114,6 +114,20 @@ query GetFriend {
   }
 }`;
 
+export const GET_USER_BETS = gql`
+query userBets {
+  userBets{
+    _id
+    chosenTeam
+    betAmount
+    singleGameOdds 
+    createdAt
+    userId
+  }
+}`;
+
+
+
 const subscription = gql`
   subscription UserOnlineStatus($userId: ID!) {
   userOnlineStatus(userId: $userId) {

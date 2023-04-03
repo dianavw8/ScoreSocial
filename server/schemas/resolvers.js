@@ -2,7 +2,7 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { secret, expiration } = require("./config"); // import your config file with secret and expiration values
 require("dotenv").config();
-
+const { Bet } = require("../models");
 const { User } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { db } = require("../models/User");
@@ -47,6 +47,15 @@ const resolvers = {
 
       return [data];
     },
+    userBets: async (_, __, { user }) => {
+      if (!user) {
+        throw new Error('Not authenticated');
+      }
+
+      const bets = await Bet.find({ userId: user._id });
+
+      return bets;
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -86,6 +95,27 @@ const resolvers = {
         {returnOriginal: false}
       );
       return user.value
+    },
+    addBet: async (_, { chosenTeam, betAmount, singleGameOdds }, context) => {
+      // Check if user is authenticated
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a bet.");
+      }
+    
+      // Create new bet
+      const bet = new Bet({
+        chosenTeam,
+        betAmount,
+        singleGameOdds,
+        createdAt: new Date().toISOString(),
+        userId: context.user._id,
+      });
+    
+      // Save bet to database
+      await bet.save();
+    
+      // Return newly created bet
+      return bet;
     },
   },
 };

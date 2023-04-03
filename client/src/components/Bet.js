@@ -1,33 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import {
+  Button,
   Container,
   Grid,
+  Divider,
   Icon,
-  Menu,
+  Header,
   Segment,
+  Input,
 } from "semantic-ui-react";
-import MyContext from '../components/MyContext';
-import { useMutation, useQuery } from '@apollo/client';
-import { UPDATE_POINTS } from '../utils/mutations';
-import { GET_USER,GET_SINGLE_ODDS } from '../utils/queries';
+import MyContext from "../components/MyContext";
+import { useMutation, useQuery } from "@apollo/client";
+import { UPDATE_POINTS } from "../utils/mutations";
+import { GET_USER, GET_SINGLE_ODDS } from "../utils/queries";
+import { ADD_BET } from "../utils/mutations";
 
-const BETTING_URL = '';
-let BetData;
+export default function BettingGame({ activeSport }) {
+  console.log("this is activeSport: ", activeSport);
 
-export default function BettingGame({activeSport}) {
-  console.log("this is activeSport: ",activeSport);
-
-  let activeSportApiRef = activeSportApiReference(activeSport); 
-  console.log("this is activeSportApiRef: ",activeSportApiRef);
+  let activeSportApiRef = activeSportApiReference(activeSport);
+  console.log("this is activeSportApiRef: ", activeSportApiRef);
 
   const [balance, setBalance] = useState(100);
   const [betAmount, setBetAmount] = useState(0);
+  const [selectedTeam, setSelectedTeam] = useState(null);
   const [betResult, setBetResult] = useState(null);
   const { gameId, setGameId } = useContext(MyContext);
   const [showImage, setShowImage] = useState("");
+  const [addBet, { error }] = useMutation(ADD_BET);
+  const [betPlaced, setBetPlaced] = useState(false);
 
   useEffect(() => {
-      setShowImage(activeSport);
+    setShowImage(activeSport);
   }, []);
 
   const { loading, data } = useQuery(GET_SINGLE_ODDS, {
@@ -37,7 +41,8 @@ export default function BettingGame({activeSport}) {
 
   console.log("odd data:");
   console.log(data?.singleGameOdds[0]);
-  BetData = data?.singleGameOdds[0];
+
+  const BetData = data?.singleGameOdds[0];
 
   if (loading == false && BetData == null) {
     return <h1>Bets on this game can no longer be made.</h1>;
@@ -71,35 +76,6 @@ export default function BettingGame({activeSport}) {
     return content;
   }
 
-  async function placeBet() {
-    try {
-      const response = await fetch(BETTING_URL, {
-        method: 'POST',
-        body: JSON.stringify({ amount: betAmount }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      const data = await response.json();
-      const { win, amount, payout } = data;
-
-      if (win) {
-        setBalance(balance + payout);
-        setBetResult(`You won ${payout} points`);
-      } else {
-        setBalance(balance - amount);
-        setBetResult(`You lost ${amount} points`);
-      }
-
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
-
-  function handleBetAmountChange(event) {
-    const amount = Number(event.target.value);
-    setBetAmount(amount);
-  }
-
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
     const formattedDate = dateObj.toLocaleDateString("en-US");
@@ -107,22 +83,92 @@ export default function BettingGame({activeSport}) {
     return `${formattedDate} ${formattedTime}`;
   }
 
+
+  function handlePlaceBet() {
+    console.log("PLACING BET");
+    console.log("selectedTeam:", selectedTeam);
+    console.log("betAmount:", betAmount);
+    if (selectedTeam && betAmount > 0) {
+      addBet({
+        variables: {
+          chosenTeam: selectedTeam,
+          betAmount: parseInt(betAmount),
+          singleGameOdds: JSON.stringify(BetData),
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          //setBalance(res.data.updatePoints.points);
+          //setBetResult(res.data.addBet);
+        setBetPlaced(true); // set state variable to true
+        console.log("BET SUCCESSFUL");
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   return (
     <div>
-       <>
-          <div className="centered-text">
-            <Container>
-              <h1 class="teal-text"> {BetData?.sport_title} : Place a Bet!</h1>
-              <h3>{BetData?.away_team} at {BetData?.home_team}</h3>
-              <h3>{formatDate(BetData?.commence_time)}</h3>
-            </Container>
-          </div>
-          <img
-            className={`slide-in-memo ${showImage == "English Premier League" ? 'show-memo' : ''}`}
-            src="/assets/Guillermo-Ochoa.png"
-            alt="Guillermo Ochoa"
-            />
-        </>
+      <>
+      {betPlaced && <h1 className="teal-text center-text-simple">BET HAS BEEN PLACED</h1>}
+
+        <div className="centered-text">
+          <Container>
+            <Grid divided="vertically">
+              <Grid.Row>
+                <Grid.Column>
+                  <Header as="div" attached="top" block>
+                    <h2>{BetData?.away_team} at {BetData?.home_team}</h2>
+                    <h3>{formatDate(BetData?.commence_time)}</h3>
+                  </Header>
+                  <Segment attached>
+                    <Segment.Group horizontal>
+                    <Segment
+                      className={selectedTeam === BetData?.away_team ? "selected-team" : ""}
+                      onClick={() => setSelectedTeam(BetData?.away_team)}
+                    >
+                      {BetData?.away_team}
+                    </Segment>
+                    <Segment
+                      className={selectedTeam === BetData?.home_team ? "selected-team" : ""}
+                      onClick={() => setSelectedTeam(BetData?.home_team)}
+                    >
+                      {BetData?.home_team}
+                    </Segment>
+                    </Segment.Group>
+                    <Divider section style={{ margin: "-0.2em" }} />
+                    <Segment.Group horizontal>
+                     
+                      <Segment>Bet Amount: </Segment>
+                      <Input
+                        type="number"
+                        value={betAmount}
+                        onChange={(e) => setBetAmount(e.target.value)}
+                      />
+                      <Button
+                        animated
+                        size="large"
+                        basic
+                        color="teal"
+                        floated="right"
+                        onClick={handlePlaceBet}
+                      >
+                        <Button.Content visible>Place Bet</Button.Content>
+                        <Button.Content hidden>
+                          <Icon name="arrow right" />
+                        </Button.Content>
+                      </Button>
+                    </Segment.Group>
+                  </Segment>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
+        </div>
+      </>
     </div>
   );
 }

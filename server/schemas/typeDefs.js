@@ -2,12 +2,12 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Bet {
-    betId: String
-    match: String
-    stake: Float
-    odds: Float
+    _id: ID
+    chosenTeam: String!
+    betAmount: Int!
+    singleGameOdds: String
     createdAt: String
-    participants: [String]
+    userId: String
   }
 
   type User {
@@ -103,6 +103,7 @@ const typeDefs = gql`
     gameOdds(sport: String!): [gameOdds!]!
     gameScores(sport: String!): [gameScores!]!
     singleGameOdds(sport: String!, eventId: String!): [singleGameOdds!]!
+    userBets: [Bet!]!
   }
 
   type Friend {
@@ -115,6 +116,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     logout: LogoutResponse
     updatePoints(input: UpdatePointsInput): User!
+    addBet(chosenTeam: String!, betAmount: Int!, singleGameOdds: String!): Bet
   }
 `
 

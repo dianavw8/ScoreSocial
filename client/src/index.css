@@ -34,16 +34,26 @@ h6 {
   min-height: 300px;
   text-align: -webkit-center;
 }
+
 .slide-in-memo {
   position: absolute;
-  right: -195%;
-  top: 44%;
+  right: -76%;
+  top: 52%;
   transition: transform 1s ease-in-out;
 }
 
 .show-memo {
   transform: translateX(-490%);
-  width: 50%;
+  width: 30%;
+}
+.bet-wrapper{
+  margin-top: 50px;
+}
+.selected-team{
+  background-color: rgb(120, 197, 197) !important;
+}
+.center-text-simple{
+  text-align: -webkit-center;
 }
 
 .red-text{
