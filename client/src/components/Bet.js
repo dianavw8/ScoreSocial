@@ -13,14 +13,11 @@ import { MyContext, SportContext } from "../components/MyContext";
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_POINTS , ADD_BET} from '../utils/mutations';
 import { GET_USER,GET_SINGLE_ODDS } from '../utils/queries';
+import Auth from "../utils/auth";
 
 export default function BettingGame({ activeSport }) {
-  console.log("this is activeSport: ", activeSport);
 
   let activeSportApiRef = activeSportApiReference(activeSport);
-  console.log("this is activeSportApiRef: ", activeSportApiRef);
-
-  const [balance, setBalance] = useState(100);
   const [betAmount, setBetAmount] = useState(0);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [betResult, setBetResult] = useState(null);
@@ -28,20 +25,37 @@ export default function BettingGame({ activeSport }) {
   const [showImage, setShowImage] = useState("");
   const [addBet, { error }] = useMutation(ADD_BET);
   const [betPlaced, setBetPlaced] = useState(false);
+  const [updatePoints] = useMutation(UPDATE_POINTS);
+  const [NotEnoughPointsMessage, setMessage] = useState("");
+  const [userProfile, setUserProfile] = useState({});
 
-  useEffect(() => {
+ // If the user is logged in, set the `userProfile` state to the logged-in user's information
+ useEffect(() => {
+  if (Auth.loggedIn()) {
+    console.log("User logged in");
+    const profileData = Auth.getProfile();
+    setUserProfile(profileData);
+    console.log("profileData");
+    console.log(profileData);
     setShowImage(activeSport);
-  }, []);
+  }
+}, [])
 
   const { loading, data } = useQuery(GET_SINGLE_ODDS, {
     variables: { sport: activeSportApiRef, eventId: gameId },
   });
-  console.log("this is gameId: ", gameId);
+  console.log("userProfile before userData fetch");
+  console.log(userProfile);
 
-  console.log("odd data:");
-  console.log(data);
-  console.log(data?.singleGameOdds[0]);
-
+  const userDataQuery = useQuery(GET_USER, {
+    variables: { username: userProfile?.data?.username },
+    fetchPolicy: 'network-only',
+  });
+  
+  const userData = userDataQuery.data?.user;
+  console.log("userdata");
+  console.log(userData);
+  const points = userData?.points;
   const BetData = data?.singleGameOdds[0];
 
   if (loading == false && BetData == null) {
@@ -83,37 +97,47 @@ export default function BettingGame({ activeSport }) {
     return `${formattedDate} ${formattedTime}`;
   }
 
-
   function handlePlaceBet() {
-    console.log("PLACING BET");
-    console.log("selectedTeam:", selectedTeam);
-    console.log("betAmount:", betAmount);
+    // console.log("PLACING BET");
+    // console.log("selectedTeam:", selectedTeam);
+    // console.log("betAmount:", betAmount);
+    // console.log("points:", points);
+    setMessage("");
+
     if (selectedTeam && betAmount > 0) {
-      addBet({
+      const newPoints = points - betAmount;
+      //console.log("newPoints:", newPoints);
+
+      if (newPoints < 0) {
+        setMessage("You do not have enough points to place this bet.");
+        return;
+      }
+      updatePoints({
         variables: {
-          chosenTeam: selectedTeam,
-          betAmount: parseInt(betAmount),
-          singleGameOdds: JSON.stringify(BetData),
+          username: userProfile.data.username,
+          points: newPoints,
         },
+        refetchQueries: [{ query: GET_USER, variables: { username: userProfile.data.username } }],
       })
         .then((res) => {
           console.log(res);
           //setBalance(res.data.updatePoints.points);
           //setBetResult(res.data.addBet);
-        setBetPlaced(true); // set state variable to true
-        console.log("BET SUCCESSFUL");
-
+          setBetPlaced(true); // set state variable to true
+          console.log("BET SUCCESSFUL");
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }
+  
 
   return (
     <div>
       <>
-      {betPlaced && <h1 className="teal-text center-text-simple">BET HAS BEEN PLACED</h1>}
+      {(betPlaced && !NotEnoughPointsMessage) && <h1 className="teal-text center-text-simple">BET HAS BEEN PLACED</h1>}
+      {NotEnoughPointsMessage && <h1 className="red-text error-message center-text-simple">{NotEnoughPointsMessage}</h1>}
 
         <div className="centered-text">
           <Container>

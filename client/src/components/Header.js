@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -13,6 +12,8 @@ import {
 } from "semantic-ui-react";
 import Auth from "../utils/auth";
 import { GET_USER } from "../utils/queries";
+import { UPDATE_POINTS } from "../utils/mutations";
+import { useQuery, useMutation } from "@apollo/client";
 
 const SSHeader = ({ pointsEarned, loginForm, onLogout}) => {
   const [userProfile, setUserProfile] = useState({});
@@ -30,6 +31,13 @@ const SSHeader = ({ pointsEarned, loginForm, onLogout}) => {
     variables: { username: userProfile?.data?.username },
   });
   const points = data?.user?.points;
+  const [updatePoints] = useMutation(UPDATE_POINTS);
+
+  const handlePointsUpdate = (pointsToAdd) => {
+    const updatedPoints = points + pointsToAdd;
+    updatePoints({ variables: { username: userProfile.data.username, points: updatedPoints } });
+  };
+  
 
   return (
     <Menu fixed="top" inverted compact icon="labeled">
@@ -59,27 +67,28 @@ const SSHeader = ({ pointsEarned, loginForm, onLogout}) => {
           <Grid centered divided columns={3}>
             <Grid.Column textAlign="center">
               <Header as="h4"> Add Points</Header>
-              <Button>
+              <Button onClick={() => handlePointsUpdate(10)}>
                 <Icon name="plus square" />
                 10
               </Button>
             </Grid.Column>
             <Grid.Column textAlign="center">
               <Header as="h4"> Add Points</Header>
-              <Button>
+              <Button onClick={() => handlePointsUpdate(25)}>
                 <Icon name="plus square" />
                 25
               </Button>
             </Grid.Column>
             <Grid.Column textAlign="center">
               <Header as="h4"> Add Points</Header>
-              <Button>
+              <Button onClick={() => handlePointsUpdate(50)}>
                 <Icon name="plus square" />
                 50
               </Button>
             </Grid.Column>
           </Grid>
         </Popup>
+
         {/* Points */}
 
        
