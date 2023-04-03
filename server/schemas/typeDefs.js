@@ -105,6 +105,11 @@ const typeDefs = gql`
     singleGameOdds(sport: String!, eventId: String!): singleGameOdds!
   }
 
+  type Friend {
+    id: ID!
+    username: String!
+  }
+
   type Mutation {
     addUser(
       username: String!

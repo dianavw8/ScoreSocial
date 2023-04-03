@@ -3,8 +3,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import { MyContext, SportContext } from "../components/MyContext";
 import { Link } from "react-router-dom";
-  
-const Epl = () => {
+
+const Epl = ({ onSetActiveItem }) => {
   const { gameId, setGameId } = useContext(MyContext);
   console.log(gameId);
   const { sport, setSport } = useContext(SportContext);
@@ -20,6 +20,14 @@ const Epl = () => {
   }
 
   const gameOdds = data?.gameOdds;
+  
+  if (gameOdds === []) {
+    return (
+      <>
+        <h1>There are no upcoming games.</h1>
+      </>
+    );
+  }
   console.log(gameOdds);
 
   function formatDate(dateStr) {
@@ -28,23 +36,28 @@ const Epl = () => {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
+  
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
 
   return (
     <>
-      <div className="centered-text">
-        <h1>English Premier League</h1>
-        <div>
+      <div className="content-wrapper">
+        <h1 className="teal-text">English Premier League</h1>
+        <div className="button-wrapper">
           {gameOdds?.map((odds) => (
             <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
-              <button onClick={(e) => setGameId(odds.id)}>
-                <ul>
-                  <li>
-                    {odds.home_team} vs. {odds.away_team}
-                  </li>
-                  <li>Start Time: {formatDate(odds.commence_time)}</li>
-                </ul>
-              </button>
-            </Link>
+            <button onClick={(e) => setGameId(odds.id)}>
+              <ul>
+                <li>
+                  {odds.home_team} vs. {odds.away_team}
+                </li>
+                <li>Start Time: {formatDate(odds.commence_time)}</li>
+              </ul>
+            </button>
+          </Link>
           ))}
         </div>
       </div>

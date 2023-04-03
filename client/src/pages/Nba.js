@@ -4,7 +4,7 @@ import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import { MyContext, SportContext } from "../components/MyContext";
 import { Link } from "react-router-dom";
 
-const Nba = ({ selected, setSelected }) => {
+const Nba = ({ selected, setSelected, onSetActiveItem}) => {
   const { gameId, setGameId } = useContext(MyContext);
   console.log(gameId);
   const { sport, setSport } = useContext(SportContext);
@@ -28,11 +28,15 @@ const Nba = ({ selected, setSelected }) => {
     return `${formattedDate} ${formattedTime}`;
   }
 
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
   return (
     <>
-      <div className="centered-text">
-        <h1>National Basketball League</h1>
-        <div>
+      <div className="content-wrapper">
+        <h1 className="teal-text">National Basketball League</h1>
+        <div className="button-wrapper">
           {gameOdds?.map((odds) => (
             <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
             <button onClick={(e) => setGameId(odds.id)}>

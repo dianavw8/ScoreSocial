@@ -4,7 +4,7 @@ import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import { MyContext, SportContext } from "../components/MyContext";
 import { Link } from "react-router-dom";
 
-const Nfl = () => {
+const Nfl = ({ onSetActiveItem }) => {
   const { gameId, setGameId } = useContext(MyContext);
   console.log(gameId);
   const { sport, setSport } = useContext(SportContext);

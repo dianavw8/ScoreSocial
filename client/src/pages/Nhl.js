@@ -4,7 +4,7 @@ import { GET_ODDS, GET_SCORES } from "../utils/queries";
 import { MyContext, SportContext } from "../components/MyContext";
 import { Link } from "react-router-dom";
 
-const Nhl = () => {
+const Nhl = ({ onSetActiveItem }) => {
   const { gameId, setGameId } = useContext(MyContext);
   console.log(gameId);
   const { sport, setSport } = useContext(SportContext);
@@ -17,6 +17,11 @@ const Nhl = () => {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
+
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
 
   const { loading, data } = useQuery(GET_ODDS, {
     // need to set the sport_key: whatever staate variable we createed to hold the sport_key of what sport we are looking for the games for
@@ -31,9 +36,9 @@ const Nhl = () => {
 
   return (
     <>
-      <div className="centered-text">
-        <h1>National Hockey League</h1>
-        <div>
+      <div className="content-wrapper">
+        <h1 className="teal-text">National Hockey League</h1>
+        <div className="button-wrapper">
           {gameOdds?.map((odds) => (
             <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
             <button onClick={(e) => setGameId(odds.id)}>
