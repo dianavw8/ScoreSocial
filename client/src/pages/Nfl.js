@@ -22,6 +22,10 @@ const Nfl = ({ onSetActiveItem }) => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
 
+  const handleClick = (oddsId) => {
+    setGameId(oddsId);
+    onSetActiveItem("PlaceBet");
+  };
   function formatDate(dateStr) {
     const dateObj = new Date(dateStr);
     const formattedDate = dateObj.toLocaleDateString("en-US");
