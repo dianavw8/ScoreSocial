@@ -24,7 +24,11 @@ const userSchema = new Schema(
     points: {
       type: Number,
       required: true,
-    }
+    },
+    bets:[{
+      type: Schema.Types.ObjectId,
+      ref: "Bet"
+    }]
   },
   // set this to use virtual below
   {
