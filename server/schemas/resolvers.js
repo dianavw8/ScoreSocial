@@ -89,13 +89,21 @@ const resolvers = {
       // Return a success message
       return { message: "Logged out successfully" };
     },
-    updatePoints: async (_, { userId, points }) => {
-      const user = await User.findOneAndUpdate(
-        { _id: isValidObjectId(userId) },
-        { $inc: { points: points } },
-        { returnOriginal: false }
-      );
-      return user.value;
+    updatePoints: async (_, { username, points }) => {
+      try {
+        console.log(username, points)
+        const user = await User.findOne({ username: username });
+        if (!user) {
+          throw new Error(`User ${username} not found`);
+        }
+
+        user.points = points;
+        await user.save();
+
+        return user;
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };

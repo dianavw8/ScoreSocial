@@ -1,57 +1,63 @@
-import React, { useState, useContext } from 'react';
-import { Button, Form, Message, } from 'semantic-ui-react';
-import { useMutation, useQuery } from '@apollo/client';
-import Auth from '../utils/auth'
-import { UPDATE_POINTS } from '../utils/mutations';
-import { GET_USER } from '../utils/queries';
-// import { User } from '../../../server/models';
+import React, { useState } from "react";
+import { Button, Message } from "semantic-ui-react";
+import { useMutation, useQuery } from "@apollo/client";
+import Auth from "../utils/auth";
+import { UPDATE_POINTS } from "../utils/mutations";
+import { GET_USER } from "../utils/queries";
+
+const PointsForm = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [addPoints, setAddPoints] = useState(0);
+  const [usePoints, setUsePoints] = useState(0);
+  const { data } = useQuery(GET_USER, {
+    variables: { username: Auth.getProfile().data.username },
+  });
+  const username = data?.user.username;
+  const points = data?.user.points;
+
+  const [updatePoints, { loading: updateLoading, error: updateError }] = useMutation(UPDATE_POINTS);
 
 
-const UpdatePoints = (props) => {
-    const [addPoints, setAddPoints] = useState(0)
-    const [usePoints, setUsePoints] = useState(0)
-    // const profileData = Auth.getProfile();
-    // const {username, id, points} = profileData.data
-    // const usernamestr = `${username}`
-    // // const userId = User.findById(id)
-    // // console.log(userId)
-    // const { loading, data } = useQuery(GET_USER, {
-    //   variables: { username: 'Logan2' },
-    // });
-    const { loading, data } = useQuery(GET_USER, {
-      variables: { username: Auth.getProfile().data.username },
-    });
-    console.log(data?.user)
-    const username = props.username
-    const points = props.points
-    // const { me } = data
-    // const { id, username, email, points} = me;
-    // console.log(username)
-    const [updatePoints, { loading: updateLoading, error: updateError }] = useMutation(UPDATE_POINTS);
-
-     const handlePointsClick = (points) => {
-    setAddPoints(points);
-    updatePoints({ variables: { username, points } }).then((result) => {
-      console.log(result.data.updateUser.user.points);
-      setAddPoints(0);
-    });
-  };
-    const handleUsePointsSubmit = async (event) => {
-        event.preventDefault();
-        const input = {
-          points: -usePoints
-        };
-        updatePoints({variables: { input }})
-        .then(result => {
-          console.log(result.data.updateUser.user.points);
-          setUsePoints(0);
-        });
-    };
     
-// console.log(points)
-    // const user = data;
-// console.log(data)
-    return (
+  const handlePointsClick = (addPoints) => {
+    let newPoints = points + addPoints
+      console.log(username, newPoints)
+    updatePoints({ variables: { username: username, points: newPoints } })
+      .then((result) => {
+        console.log(result);
+        setAddPoints(0);
+      })
+      .catch((err) => {
+        console.error('Mutation error:', err);
+      });
+  };
+
+  const handleUsePointsChange = (event) => {
+    setUsePoints(parseInt(event.target.value));
+  };
+  
+  const handleUsePointsSubmit = async (event) => {
+    event.preventDefault();
+    if (usePoints > points) {
+      console.error('Cannot use more points than currently available');
+      return;
+    }
+    try {
+      let newPoints = points - usePoints;
+      console.log(username, newPoints);
+      const result = await new Promise((resolve, reject) => {
+        updatePoints({ variables: { username: String(username), points: parseInt(newPoints) } })
+          .then((result) => resolve(result))
+          .catch((err) => reject(err));
+      });
+      console.log(result);
+      setUsePoints(0);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
     <div>
       <h2>Points: {points}</h2>
       <h3>Add Points:</h3>
@@ -66,7 +72,11 @@ const UpdatePoints = (props) => {
       <form onSubmit={handleUsePointsSubmit}>
         <label>
           Points to use:
-          <input type="number" value={usePoints} onChange={(event) => setUsePoints(parseInt(event.target.value))} />
+          <input
+            type="number"
+            value={usePoints}
+            onChange={handleUsePointsChange}
+          />
         </label>
         <button type="submit">Use Points</button>
       </form>
@@ -76,5 +86,4 @@ const UpdatePoints = (props) => {
   );
 };
 
-
-export default UpdatePoints;
+export default PointsForm;
