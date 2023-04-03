@@ -1,13 +1,14 @@
-import React from "react";
-import dropdown from "react-dropdown";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Nhl = () => {
-  const [sport, setSport] = useState("icehockey_nhl");
   const { gameId, setGameId } = useContext(MyContext);
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("icehockey_nhl");
   console.log(sport);
 
   function formatDate(dateStr) {
@@ -28,21 +29,22 @@ const Nhl = () => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
 
-  console.log(gameId)
   return (
     <>
       <div className="centered-text">
         <h1>National Hockey League</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
-              <ul >
+            <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
+            <button onClick={(e) => setGameId(odds.id)}>
+              <ul>
                 <li>
                   {odds.home_team} vs. {odds.away_team}
                 </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
+          </Link>
           ))}
         </div>
       </div>

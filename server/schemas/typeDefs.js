@@ -64,8 +64,8 @@ const typeDefs = gql`
     sport_key: String
     sport_title: String
     commence_time: String
-    home_team: String
-    away_team: String
+    team_A: String
+    team_B: String
     bookmakers: [Bookmakers]
   }
 
@@ -102,15 +102,20 @@ const typeDefs = gql`
     user(username: String!): User
     gameOdds(sport: String!): [gameOdds!]!
     gameScores(sport: String!): [gameScores!]!
-    singleGameOdds(sport: String!, eventId: String!): [singleGameOdds!]!
+    singleGameOdds(sport: String!, eventId: String!): singleGameOdds!
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!, points: Int = 1000): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      points: Int = 1000
+    ): Auth
     login(email: String!, password: String!): Auth
     logout: LogoutResponse
     updatePoints(input: UpdatePointsInput): User!
   }
-`
+`;
 
 module.exports = typeDefs;

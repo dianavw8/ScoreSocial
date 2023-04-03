@@ -16,9 +16,13 @@ import LandingPage from "../pages/Landingpage";
 
 
 export default class Navbar extends Component {
-  state = { activeItem: "Landingpage" };
+  state = { activeItem: "Landingpage" }
+ 
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) => 
+  this.setState({ activeItem: name })
+
+
 
   render() {
     const { activeItem } = this.state;
@@ -47,7 +51,6 @@ export default class Navbar extends Component {
         content = <Nfl />;
     }
     
-
     return (
       <Container>
         <Container style={{ marginTop: "6.5em" }}>
@@ -77,6 +80,7 @@ export default class Navbar extends Component {
                   MLB
                 </Menu.Item>
                 <Menu.Item
+                  className= "soccer_usa_mls"
                   name="English Premier League"
                   as="h4"
                   inverted

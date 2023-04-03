@@ -13,11 +13,11 @@ export const GET_USER = gql`
 
 export const GET_CURRENT_USER = gql`
   query me {
-    me{
-    id
-    email
-    username
-    points
+    me {
+      id
+      email
+      username
+      points
     }
   }
 `;
@@ -49,48 +49,48 @@ export const GET_ODDS = gql`
 `;
 
 export const GET_SCORES = gql`
-query Query($sport: String!) {
-  gameScores(sport: $sport) {
-    id
-    sport_key
-    sport_title
-    commence_time
-    completed
-    home_team
-    away_team
-    scores {
-      name
-      score
+  query Query($sport: String!) {
+    gameScores(sport: $sport) {
+      id
+      sport_key
+      sport_title
+      commence_time
+      completed
+      home_team
+      away_team
+      last_update
+      scores {
+        name
+        score
+      }
     }
-    last_update
   }
-}
 `;
 
 export const GET_SINGLE_ODDS = gql`
-query singleGameOdds($sport: String!, $eventId: String!) {
-  singleGameOdds(sport: $sport, eventId: $eventId) {
-    id
-    sport_key
-    sport_title
-    commence_time
-    home_team
-    away_team
-    bookmakers {
-      key
-      title
-      last_update
-      markets {
+  query Query($sport: String!, $eventId: String!) {
+    singleGameOdds(sport: $sport, eventId: $eventId) {
+      id
+      sport_key
+      sport_title
+      commence_time
+      team_A
+      team_B
+      bookmakers {
         key
-        outcomes {
-          label
-          price
-          points
+        title
+        last_update
+        markets {
+          key
+          outcomes {
+            price
+            label
+            points
+          }
         }
       }
     }
   }
-}
 `;
 
 export const GET_USER_PROFILE = gql`

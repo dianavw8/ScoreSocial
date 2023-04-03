@@ -7,7 +7,7 @@ const LandingPage = () => {
     return (
         <>
           <div className="landing">
-            <Container classname="hero">
+            <Container className="hero">
               <p>Are you a sports enthusiast? <br></br>Are you competitive? <br></br>
                 Use ScoreSocial to place bets against your friends and engage in friendly competition.
                 <br></br><Button color='teal' type='submit' href='/signup'>

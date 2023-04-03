@@ -1,12 +1,14 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Nba = ({ selected, setSelected }) => {
-  const [sport, setSport] = useState("basketball_nba");
   const { gameId, setGameId } = useContext(MyContext);
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("basketball_nba");
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -32,14 +34,16 @@ const Nba = ({ selected, setSelected }) => {
         <h1>National Basketball League</h1>
         <div>
           {gameOdds?.map((odds) => (
-            <button onClick={(e) => setGameId(odds.id)} key={odds.id}>
-              <ul >
+            <Link key={odds.id} to={`/gamedescription/:${odds.id}`}>
+            <button onClick={(e) => setGameId(odds.id)}>
+              <ul>
                 <li>
                   {odds.home_team} vs. {odds.away_team}
                 </li>
                 <li>Start Time: {formatDate(odds.commence_time)}</li>
               </ul>
             </button>
+          </Link>
           ))}
         </div>
       </div>
