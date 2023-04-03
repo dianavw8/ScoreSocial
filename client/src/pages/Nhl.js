@@ -1,13 +1,14 @@
-import React from "react";
-import dropdown from "react-dropdown";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Nhl = ({ onSetActiveItem }) => {
-  const [sport, setSport] = useState("icehockey_nhl");
   const { gameId, setGameId } = useContext(MyContext);
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("icehockey_nhl");
   console.log(sport);
 
   function formatDate(dateStr) {
@@ -33,7 +34,6 @@ const Nhl = ({ onSetActiveItem }) => {
   const gameOdds = data?.gameOdds;
   console.log(gameOdds);
 
-  console.log(gameId)
   return (
     <>
       <div className="content-wrapper">

@@ -1,13 +1,14 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ODDS, GET_SCORES } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Nfl = ({ onSetActiveItem }) => {
-  const [sport, setSport] = useState("americanfootball_nfl");
   const { gameId, setGameId } = useContext(MyContext);
-
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("americanfootball_nfl");
   console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
@@ -27,12 +28,6 @@ const Nfl = ({ onSetActiveItem }) => {
     const formattedTime = dateObj.toLocaleTimeString("en-US");
     return `${formattedDate} ${formattedTime}`;
   }
-
-
-  const handleClick = (oddsId) => {
-    setGameId(oddsId);
-    onSetActiveItem("PlaceBet");
-  };
 
   return (
     <>

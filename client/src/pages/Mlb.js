@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_ODDS } from "../utils/queries";
-import MyContext from '../components/MyContext';
+import React, { useState, useContext } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ODDS, GET_SCORES } from "../utils/queries";
+import { MyContext, SportContext } from "../components/MyContext";
+import { Link } from "react-router-dom";
 
 const Mlb = ({ onSetActiveItem }) => {
-  const [sport, setSport] = useState("baseball_mlb");
   const { gameId, setGameId } = useContext(MyContext);
+  console.log(gameId);
+  const { sport, setSport } = useContext(SportContext);
+  setSport("baseball_mlb");
+  console.log(sport);
 
   const { loading, data } = useQuery(GET_ODDS, {
     variables: { sport },

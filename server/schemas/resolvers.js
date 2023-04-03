@@ -44,7 +44,7 @@ const resolvers = {
       const { data } = await axios(
         `https://api.the-odds-api.com/v4/sports/${sport}/events/${eventId}/odds?apiKey=${process.env.API_KEY}&regions=us&markets=h2h&dateFormat=iso&oddsFormat=decimal`
       );
-
+      
       return [data];
     },
     userBets: async (_, __, { user }) => {
@@ -88,13 +88,21 @@ const resolvers = {
       // Return a success message
       return { message: "Logged out successfully" };
     },
-    updatePoints: async (_, { userId, points }) => {
-      const user = await User.findOneAndUpdate(
-        {_id: isValidObjectId(userId)},
-        {$inc: {points: points}},
-        {returnOriginal: false}
-      );
-      return user.value
+    updatePoints: async (_, { username, points }) => {
+      try {
+        console.log(username, points)
+        const user = await User.findOne({ username: username });
+        if (!user) {
+          throw new Error(`User ${username} not found`);
+        }
+
+        user.points = points;
+        await user.save();
+
+        return user;
+      } catch (error) {
+        console.error(error);
+      }
     },
     addBet: async (_, { chosenTeam, betAmount, singleGameOdds }, context) => {
       // Check if user is authenticated
