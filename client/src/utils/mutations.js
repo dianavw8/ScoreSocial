@@ -61,14 +61,10 @@ export const ADD_BET = gql`
   mutation AddBet($chosenTeam: String!, $betAmount: Int!, $singleGameOdds: String!) {
     addBet(chosenTeam: $chosenTeam, betAmount: $betAmount, singleGameOdds: $singleGameOdds) {
       _id
-      username
-      email
-      bets {
-        _id
-        chosenTeam
-        betAmount
-        singleGameOdds
-      }
+      chosenTeam
+      betAmount
+      userId
+      singleGameOdds 
     }
   }
 `;

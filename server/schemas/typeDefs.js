@@ -16,10 +16,10 @@ const typeDefs = gql`
     username: String!
     password: String!
     friends: [String]
+    activeBets: [String]
     points: Int
     betHistory: [String]
     profile: Profile
-    bets: [Bet]
   }
 
   type Profile {
@@ -116,7 +116,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     logout: LogoutResponse
     updatePoints(username: String!, points: Int!): User!
-    addBet(chosenTeam: String!, betAmount: Int!, singleGameOdds: String!): User
+    addBet(chosenTeam: String!, betAmount: Int!, singleGameOdds: String!): Bet
   }
 `;
 
