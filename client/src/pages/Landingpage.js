@@ -9,10 +9,10 @@ const LandingPage = () => {
         <div className="landing">
           <Container classname="hero">
             <p>
-              Are you a sports enthusiast? <br></br>Are you competitive?{" "}
+            Want to be able to place bets at anytime, anywhere without hurting your wallet?
+              <br></br>We have the site just for you!{" "}
               <br></br>
-              Use ScoreSocial to place bets against your friends and engage in
-              friendly competition.
+              Use ScoreSocial to place bets and test your knowledge on the outcomes of games!
               <br></br>
               <Button
                 color="teal"
