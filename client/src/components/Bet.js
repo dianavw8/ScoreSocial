@@ -39,7 +39,6 @@ export default function BettingGame({ activeSport }) {
     setUserProfile(profileData);
     console.log("profileData");
     console.log(profileData);
-    setShowImage(activeSport);
   }
 }, [])
 
@@ -100,7 +99,7 @@ export default function BettingGame({ activeSport }) {
   }
 // handlePLaceBet needs to be updated to get values of chosenTeam and singleGameOdds from form
   function handlePlaceBet() {
-    // console.log("PLACING BET");
+    console.log("PLACING BET");
     // console.log("selectedTeam:", selectedTeam);
     // console.log("betAmount:", betAmount);
     // console.log("points:", points);
@@ -114,6 +113,7 @@ export default function BettingGame({ activeSport }) {
         setMessage("You do not have enough points to place this bet.");
         return;
       }
+      //set points
       updatePoints({
         variables: {
           username: userProfile.data.username,
@@ -123,13 +123,24 @@ export default function BettingGame({ activeSport }) {
       })
         .then((res) => {
           console.log(res);
-          //setBalance(res.data.updatePoints.points);
-          //setBetResult(res.data.addBet);
-          setBetPlaced(true); // set state variable to true
-          console.log("BET SUCCESSFUL");
+          //add bet
+          addBet({
+            variables: {
+              chosenTeam: selectedTeam,
+              betAmount: parseInt(betAmount),
+              singleGameOdds: JSON.stringify(BetData),
+            },
+          })
+            .then((res) => {
+              console.log(res);
+            setBetPlaced(true); // set state variable to true
+            console.log("BET SUCCESSFUL");
+    
+            })
+            .catch((err) => {
+              console.log(err);
+            });
 
-          //example of mutation insert
-          //const {data} = await addBet({variables: {chosenTeam: selectedTeam, betAmount: betAmount,  singleGameOdds: valueFromForm}})
         })
         .catch((err) => {
           console.log(err);
