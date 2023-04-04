@@ -117,17 +117,12 @@ const resolvers = {
         createdAt: new Date().toISOString(),
         userId: context.user._id,
       });
-
     
       // Save bet to database
       await bet.save();
-    const updateUser = await User.findOneAndUpdate(
-      {_id: context.user._id},
-      {$push: {bets: bet}},
-     {new: true}
-    )
+    
       // Return newly created bet
-      return updateUser;
+      return bet;
     },
   },
 };
