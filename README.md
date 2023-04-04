@@ -3,7 +3,8 @@
 ![MIT License](https://img.shields.io/static/v1?label=license&message=MIT&color=green)
 
 ## Description
-The ScoreSocial application was built using the MERN stack, with a React front end, MongoDB database, and Node.js/Express.js server and API.
+The ScoreSocial application was built using the MERN stack, with a React front end, MongoDB database, and Node.js/Express.js server and API. When using ScoreSocial, the user can preview games across five different leagues, view the odds of the games, and by using a point system, place bets to increase or decrease the total points.
+
 
 ## Table of Contents
 
@@ -33,11 +34,14 @@ For more help and information achiving this, check out the following website: ht
 ## Usage
 The refactored website can be found at: https://mighty-cliffs-23244.herokuapp.com/
 
-The following image demonstrates the application's appearance and functionality:
-![ScoreSocial image shows...]()
+The following image demonstrates the application's appearance and functionality on the homepage:
+![ScoreSocial image shows the homepage](./client/public/assets/SSlanding.jpg)
 
-The following image demonstrates the application's appearance and functionality :
-![ScoreSocial image shows...]()
+The following image demonstrates the application's appearance and functionality of the sports leagues available to bet on:
+![ScoreSocial image shows the games available for bet by sport leauge](./client/public/assets/SSnav.jpg)
+
+The following image demonstrates the application's appearance and functionality of the users bets (current and past history)  :
+![ScoreSocial image shows the users bets history](./client/public/assets/SSbets.jpg)
 
 ## License
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from "semantic-ui-react";
 import { Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 
 const LandingPage = () => {
@@ -14,14 +15,14 @@ const LandingPage = () => {
               <br></br>
               Use ScoreSocial to place bets and test your knowledge on the outcomes of games!
               <br></br>
-              <Button
-                color="teal"
-                type="submit"
-                href="/signup"
-                style={{ marginTop: "1em" }}
-              >
-                Sign up for free today!
-              </Button>
+              <Link to="/signup"> {/* Use Link instead of href */}
+                <Button
+                  color="teal"
+                  style={{ marginTop: "1em" }}
+                >
+                  Sign up for free today!
+                </Button>
+              </Link>
             </p>
           </Container>
         </div>
